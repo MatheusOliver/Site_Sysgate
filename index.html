@@ -1,1402 +1,1570 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
-<head>
-  <meta charset="UTF-8" />
-  <title>Sysgate - Acesso, Encomendas e Controle na Mão do Síndico</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Plataforma Sysgate para controle de acesso, visitantes e encomendas em condomínios, com aplicativo para moradores e painel completo para síndicos e administradoras." />
-  <style>
-    :root {
-      --bg-dark: #050509;
-      --bg-dark-alt: #0b0b12;
-      --accent: #e31b23;
-      --accent-soft: rgba(227, 27, 35, 0.15);
-      --text: #f5f5f7;
-      --muted: #a0a0b2;
-      --card: #11111b;
-      --border: #272739;
-      --radius-lg: 20px;
-      --radius-xl: 32px;
-      --shadow-strong: 0 24px 60px rgba(0, 0, 0, 0.7);
-      --transition-fast: 0.2s ease-out;
-    }
+  <head>
+    <meta charset="UTF-8" />
+    <title>Sysgate - Acesso, Encomendas e Controle na Mão do Síndico</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Plataforma Sysgate para controle de acesso, visitantes e encomendas em condomínios, com aplicativo para moradores e painel completo para síndicos e administradoras."
+    />
+    <style>
+      :root {
+        --bg-dark: #1d1d1d;
+        --bg-dark-alt: #111111;
+        --accent: #ef4444;
+        --accent-soft: rgba(239, 68, 68, 0.16);
+        --text: #ffffff;
+        --muted: #a3a3a3;
+        --card: #111111;
+        --border: #272727;
+      }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
 
-    body {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
-        Segoe UI, sans-serif;
-      background: radial-gradient(circle at top left, #1b1b2f, #020209 55%);
-      color: var(--text);
-      line-height: 1.6;
-      scroll-behavior: smooth;
-    }
+      body {
+        font-family:
+          system-ui,
+          -apple-system,
+          BlinkMacSystemFont,
+          "SF Pro Text",
+          Segoe UI,
+          sans-serif;
+        background: #1d1d1d;
+        color: var(--text);
+        line-height: 1.6;
+        scroll-behavior: smooth;
+      }
 
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
 
-    img {
-      max-width: 100%;
-      display: block;
-    }
+      img {
+        max-width: 100%;
+        display: block;
+      }
 
-    /* Layout base */
+      /* Layout base */
 
-    .page-wrap {
-      min-height: 100vh;
-      overflow-x: hidden;
-      position: relative;
-    }
+      .page-wrap {
+        min-height: 100vh;
+        overflow-x: hidden;
+        position: relative;
+      }
 
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 50;
-      backdrop-filter: blur(18px);
-      background: linear-gradient(
-        to bottom,
-        rgba(5, 5, 9, 0.95),
-        rgba(5, 5, 9, 0.75),
-        rgba(5, 5, 9, 0)
-      );
-      border-bottom: 1px solid rgba(255, 255, 255, 0.03);
-    }
+      header {
+        position: sticky;
+        top: 0;
+        z-index: 50;
+        backdrop-filter: blur(18px);
+        background: linear-gradient(
+          to bottom,
+          rgba(5, 5, 9, 0.95),
+          rgba(5, 5, 9, 0.75),
+          rgba(5, 5, 9, 0)
+        );
+        border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+      }
 
-    .nav {
-      max-width: 1120px;
-      margin: 0 auto;
-      padding: 14px 20px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
+      .nav {
+        max-width: 1120px;
+        margin: 0 auto;
+        padding: 14px 20px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
 
-    .nav-left {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
+      .nav-left {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
 
-    .logo-mark {
-      width: 34px;
-      height: 34px;
-      border-radius: 999px;
-      background: radial-gradient(circle at 30% 20%, #ff4b4b, #7b0005);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 0 20px rgba(227, 27, 35, 0.6);
-      font-weight: 800;
-      font-size: 18px;
-      letter-spacing: -0.05em;
-    }
+      .logo-mark {
+        width: 34px;
+        height: 34px;
+        border-radius: 999px;
+        background: radial-gradient(circle at 30% 20%, #ff4b4b, #7b0005);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 0 20px rgba(227, 27, 35, 0.6);
+        font-weight: 800;
+        font-size: 18px;
+        letter-spacing: -0.05em;
+      }
 
-    /* INDICAÇÃO: troque esse texto por seu logo em imagem */
-    /* Exemplo:
-       <img src="assets/logo-sysgate.svg" alt="Sysgate" class="logo-img" />
+      .logo-text {
+        font-weight: 700;
+        letter-spacing: 0.05em;
+        font-size: 13px;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+
+      .logo-text span {
+        color: var(--accent);
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 24px;
+        font-size: 14px;
+        color: var(--muted);
+      }
+
+      .nav-links a {
+        position: relative;
+        padding-bottom: 4px;
+      }
+
+      .nav-links a::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 0;
+        height: 2px;
+        border-radius: 999px;
+        background: linear-gradient(90deg, var(--accent), #ff6363);
+        transition: width 0.2s ease-out;
+      }
+
+      .nav-links a:hover::after {
+        width: 100%;
+      }
+
+      .nav-ctas {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .btn {
+        border-radius: 999px;
+        padding: 9px 18px;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        font-size: 13px;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        cursor: pointer;
+        background: transparent;
+        color: var(--text);
+        transition:
+          transform var(--transition-fast),
+          box-shadow var(--transition-fast),
+          background var(--transition-fast),
+          border-color var(--transition-fast);
+        white-space: nowrap;
+      }
+
+      .btn span.icon {
+        font-size: 16px;
+      }
+
+      .btn-primary {
+        background: linear-gradient(135deg, var(--accent), #ff6363);
+        border-color: transparent;
+        box-shadow: 0 8px 28px rgba(227, 27, 35, 0.45);
+      }
+
+      .btn-primary:hover {
+        transform: translateY(-1px) scale(1.01);
+        box-shadow: 0 14px 40px rgba(227, 27, 35, 0.7);
+      }
+
+      .btn-outline {
+        background: rgba(255, 255, 255, 0.02);
+      }
+
+      .btn-outline:hover {
+        background: rgba(255, 255, 255, 0.06);
+        transform: translateY(-1px);
+      }
+
+      /* Hero */
+
+      .hero {
+        max-width: 1120px;
+        margin: 0 auto;
+        padding: 60px 20px 80px;
+        display: grid;
+        grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+        gap: 32px;
+        align-items: center;
+      }
+
+      .hero-kicker {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 4px 11px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+        color: var(--muted);
+        margin-bottom: 16px;
+      }
+
+      .hero-kicker-dot {
+        width: 7px;
+        height: 7px;
+        border-radius: 999px;
+        background: radial-gradient(circle, #20ff98, #067a47);
+        box-shadow: 0 0 10px rgba(32, 255, 152, 0.6);
+      }
+
+      .hero-title {
+        font-size: clamp(32px, 4vw, 44px);
+        line-height: 1.1;
+        letter-spacing: -0.04em;
+        margin-bottom: 16px;
+      }
+
+      .hero-title span {
+        background: linear-gradient(130deg, #ffffff, #ff6363, #ffb347);
+        -webkit-background-clip: text;
+        color: transparent;
+      }
+
+      .hero-subtitle {
+        font-size: 15px;
+        color: var(--muted);
+        max-width: 420px;
+        margin-bottom: 22px;
+      }
+
+      .hero-badges {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-bottom: 22px;
+        font-size: 11px;
+      }
+
+      .hero-badge {
+        padding: 4px 10px;
+        border-radius: 999px;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        background: rgba(255, 255, 255, 0.02);
+        color: var(--muted);
+      }
+
+      .hero-ctas {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-bottom: 20px;
+      }
+
+      .hero-footnote {
+        font-size: 11px;
+        color: var(--muted);
+      }
+
+      .hero-highlight {
+        color: var(--accent);
+        font-weight: 600;
+      }
+
+      .hero-right {
+        position: relative;
+      }
+
+      .hero-card {
+        background: #111111;
+        border-radius: var(--radius-xl);
+        padding: 18px 18px 14px;
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        box-shadow: var(--shadow-strong);
+        position: relative;
+        overflow: hidden;
+        isolation: isolate;
+        transform: translateY(10px);
+        opacity: 0;
+        transition:
+          opacity 0.8s ease-out,
+          transform 0.8s ease-out;
+      }
+
+      .hero-card::before {
+        content: "";
+        position: absolute;
+        inset: -30%;
+        background:
+          radial-gradient(
+            circle at 10% -10%,
+            rgba(227, 27, 35, 0.55),
+            transparent 55%
+          ),
+          radial-gradient(
+            circle at 110% 20%,
+            rgba(255, 255, 255, 0.09),
+            transparent 55%
+          );
+        opacity: 0.7;
+        mix-blend-mode: screen;
+        pointer-events: none;
+        z-index: -1;
+      }
+
+      .hero-card-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 8px;
+        font-size: 11px;
+        color: var(--muted);
+      }
+
+      .hero-card-tag {
+        padding: 5px 10px;
+        border-radius: 999px;
+        background: rgba(0, 0, 0, 0.45);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+      }
+
+      .hero-card-tag-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 999px;
+        background: radial-gradient(circle, #20ff98, #067a47);
+      }
+
+      .hero-card-main {
+        display: grid;
+        grid-template-columns: 1.4fr 1fr;
+        gap: 14px;
+        align-items: center;
+      }
+
+      .hero-card-preview {
+        background: rgba(0, 0, 0, 0.65);
+        border-radius: 16px;
+        padding: 10px;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        position: relative;
+        overflow: hidden;
+        font-size: 11px;
+      }
+
+      /* INDICAÇÃO: substituir este bloco pelo PRINT do painel web */
+      /* Exemplo:
+       <img src="assets/dashboard_sindico.png" alt="Dashboard Sysgate" />
     */
 
-    .logo-text {
-      font-weight: 700;
-      letter-spacing: 0.05em;
-      font-size: 13px;
-      text-transform: uppercase;
-      color: var(--muted);
-    }
+      .hero-card-preview-placeholder {
+        border-radius: 12px;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        background: linear-gradient(130deg, #181828, #090910);
+        padding: 10px;
+        display: grid;
+        gap: 6px;
+      }
 
-    .logo-text span {
-      color: var(--accent);
-    }
+      .hero-card-preview-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 10px;
+        color: var(--muted);
+      }
 
-    .nav-links {
-      display: flex;
-      gap: 24px;
-      font-size: 14px;
-      color: var(--muted);
-    }
+      .pill {
+        padding: 2px 8px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+      }
 
-    .nav-links a {
-      position: relative;
-      padding-bottom: 4px;
-    }
+      .hero-card-preview-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 6px;
+        margin-top: 4px;
+      }
 
-    .nav-links a::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      bottom: 0;
-      width: 0;
-      height: 2px;
-      border-radius: 999px;
-      background: linear-gradient(90deg, var(--accent), #ff6363);
-      transition: width 0.2s ease-out;
-    }
+      .stat-chip {
+        border-radius: 10px;
+        background: rgba(0, 0, 0, 0.4);
+        padding: 6px 7px;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+      }
 
-    .nav-links a:hover::after {
-      width: 100%;
-    }
+      .stat-label {
+        font-size: 10px;
+        color: var(--muted);
+      }
 
-    .nav-ctas {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
+      .stat-value {
+        font-size: 13px;
+        font-weight: 600;
+      }
 
-    .btn {
-      border-radius: 999px;
-      padding: 9px 18px;
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      font-size: 13px;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      cursor: pointer;
-      background: transparent;
-      color: var(--text);
-      transition: transform var(--transition-fast), box-shadow var(--transition-fast),
-        background var(--transition-fast), border-color var(--transition-fast);
-      white-space: nowrap;
-    }
+      .hero-card-mobile {
+        border-radius: 18px;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        background: radial-gradient(circle at top, #2b1218, #050509);
+        padding: 8px;
+        position: relative;
+        overflow: hidden;
+      }
 
-    .btn span.icon {
-      font-size: 16px;
-    }
-
-    .btn-primary {
-      background: linear-gradient(135deg, var(--accent), #ff6363);
-      border-color: transparent;
-      box-shadow: 0 8px 28px rgba(227, 27, 35, 0.45);
-    }
-
-    .btn-primary:hover {
-      transform: translateY(-1px) scale(1.01);
-      box-shadow: 0 14px 40px rgba(227, 27, 35, 0.7);
-    }
-
-    .btn-outline {
-      background: rgba(255, 255, 255, 0.02);
-    }
-
-    .btn-outline:hover {
-      background: rgba(255, 255, 255, 0.06);
-      transform: translateY(-1px);
-    }
-
-    /* Hero */
-
-    .hero {
-      max-width: 1120px;
-      margin: 0 auto;
-      padding: 60px 20px 80px;
-      display: grid;
-      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
-      gap: 32px;
-      align-items: center;
-    }
-
-    .hero-kicker {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 4px 11px;
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      color: var(--muted);
-      margin-bottom: 16px;
-    }
-
-    .hero-kicker-dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 999px;
-      background: radial-gradient(circle, #20ff98, #067a47);
-      box-shadow: 0 0 10px rgba(32, 255, 152, 0.6);
-    }
-
-    .hero-title {
-      font-size: clamp(32px, 4vw, 44px);
-      line-height: 1.1;
-      letter-spacing: -0.04em;
-      margin-bottom: 16px;
-    }
-
-    .hero-title span {
-      background: linear-gradient(130deg, #ffffff, #ff6363, #ffb347);
-      -webkit-background-clip: text;
-      color: transparent;
-    }
-
-    .hero-subtitle {
-      font-size: 15px;
-      color: var(--muted);
-      max-width: 420px;
-      margin-bottom: 22px;
-    }
-
-    .hero-badges {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-bottom: 22px;
-      font-size: 11px;
-    }
-
-    .hero-badge {
-      padding: 4px 10px;
-      border-radius: 999px;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      background: rgba(255, 255, 255, 0.02);
-      color: var(--muted);
-    }
-
-    .hero-ctas {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-bottom: 20px;
-    }
-
-    .hero-footnote {
-      font-size: 11px;
-      color: var(--muted);
-    }
-
-    .hero-highlight {
-      color: var(--accent);
-      font-weight: 600;
-    }
-
-    .hero-right {
-      position: relative;
-    }
-
-    .hero-card {
-      background: radial-gradient(circle at top left, #1a1a2a, #050509);
-      border-radius: var(--radius-xl);
-      padding: 18px 18px 14px;
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      box-shadow: var(--shadow-strong);
-      position: relative;
-      overflow: hidden;
-      isolation: isolate;
-      transform: translateY(10px);
-      opacity: 0;
-      transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-    }
-
-    .hero-card::before {
-      content: "";
-      position: absolute;
-      inset: -30%;
-      background:
-        radial-gradient(circle at 10% -10%, rgba(227, 27, 35, 0.55), transparent 55%),
-        radial-gradient(circle at 110% 20%, rgba(255, 255, 255, 0.09), transparent 55%);
-      opacity: 0.7;
-      mix-blend-mode: screen;
-      pointer-events: none;
-      z-index: -1;
-    }
-
-    .hero-card-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 8px;
-      font-size: 11px;
-      color: var(--muted);
-    }
-
-    .hero-card-tag {
-      padding: 5px 10px;
-      border-radius: 999px;
-      background: rgba(0, 0, 0, 0.45);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .hero-card-tag-dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 999px;
-      background: radial-gradient(circle, #20ff98, #067a47);
-    }
-
-    .hero-card-main {
-      display: grid;
-      grid-template-columns: 1.4fr 1fr;
-      gap: 14px;
-      align-items: center;
-    }
-
-    .hero-card-preview {
-      background: rgba(0, 0, 0, 0.65);
-      border-radius: 16px;
-      padding: 10px;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      position: relative;
-      overflow: hidden;
-      font-size: 11px;
-    }
-
-    /* INDICAÇÃO: substituir este bloco pelo PRINT do painel web */
-    /* Exemplo:
-       <img src="assets/print-painel-sindico.png" alt="Dashboard Sysgate" />
-    */
-
-    .hero-card-preview-placeholder {
-      border-radius: 12px;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      background: linear-gradient(130deg, #181828, #090910);
-      padding: 10px;
-      display: grid;
-      gap: 6px;
-    }
-
-    .hero-card-preview-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 10px;
-      color: var(--muted);
-    }
-
-    .pill {
-      padding: 2px 8px;
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-    }
-
-    .hero-card-preview-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 6px;
-      margin-top: 4px;
-    }
-
-    .stat-chip {
-      border-radius: 10px;
-      background: rgba(0, 0, 0, 0.4);
-      padding: 6px 7px;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-    }
-
-    .stat-label {
-      font-size: 10px;
-      color: var(--muted);
-    }
-
-    .stat-value {
-      font-size: 13px;
-      font-weight: 600;
-    }
-
-    .hero-card-mobile {
-      border-radius: 18px;
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      background: radial-gradient(circle at top, #2b1218, #050509);
-      padding: 8px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    /* INDICAÇÃO: este cartão representa o APP do morador;
+      /* INDICAÇÃO: este cartão representa o APP do morador;
        depois troque pelo mock real do app.
        Exemplo:
        <img src="assets/app-morador-visitas.png" alt="App Sysgate Morador" />
     */
 
-    .hero-card-mobile-inner {
-      border-radius: 14px;
-      background: rgba(0, 0, 0, 0.6);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      padding: 10px;
-      display: grid;
-      gap: 8px;
-      font-size: 11px;
-    }
-
-    .tag-app {
-      padding: 3px 8px;
-      border-radius: 999px;
-      border: 1px solid rgba(255, 255, 255, 0.16);
-      background: rgba(255, 255, 255, 0.06);
-      font-size: 9px;
-      text-transform: uppercase;
-      letter-spacing: 0.14em;
-    }
-
-    .list-visitors {
-      display: grid;
-      gap: 6px;
-    }
-
-    .visitor-item {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 6px 7px;
-      border-radius: 9px;
-      background: rgba(255, 255, 255, 0.02);
-      border: 1px solid rgba(255, 255, 255, 0.06);
-    }
-
-    .visitor-meta {
-      display: flex;
-      flex-direction: column;
-      gap: 1px;
-    }
-
-    .visitor-name {
-      font-size: 11px;
-      font-weight: 600;
-    }
-
-    .visitor-tag {
-      font-size: 9px;
-      color: var(--muted);
-    }
-
-    .visitor-status {
-      font-size: 9px;
-      padding: 3px 7px;
-      border-radius: 999px;
-      background: rgba(46, 212, 126, 0.12);
-      color: #8fffc4;
-      border: 1px solid rgba(46, 212, 126, 0.6);
-    }
-
-    .hero-card-footer {
-      margin-top: 10px;
-      display: flex;
-      justify-content: space-between;
-      font-size: 10px;
-      color: var(--muted);
-    }
-
-    .hero-card-footer span strong {
-      color: var(--accent);
-    }
-
-    /* Seções genéricas */
-
-    section {
-      scroll-margin-top: 80px;
-    }
-
-    .section-wrap {
-      max-width: 1120px;
-      margin: 0 auto;
-      padding: 40px 20px 70px;
-    }
-
-    .section-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
-      gap: 20px;
-      margin-bottom: 26px;
-    }
-
-    .section-title {
-      font-size: 22px;
-      letter-spacing: -0.03em;
-    }
-
-    .section-subtitle {
-      font-size: 13px;
-      color: var(--muted);
-      max-width: 380px;
-    }
-
-    /* Efeito de scroll (fade + slide) */
-
-    .reveal {
-      opacity: 0;
-      transform: translateY(30px);
-      transition: opacity 0.7s ease-out, transform 0.7s ease-out;
-    }
-
-    .reveal.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* Benefícios / Features */
-
-    .features-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 18px;
-    }
-
-    .feature-card {
-      background: radial-gradient(circle at top left, #171723, #050509);
-      border-radius: var(--radius-lg);
-      padding: 16px 16px 14px;
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.65);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .feature-card::before {
-      content: "";
-      position: absolute;
-      inset: -40%;
-      background: radial-gradient(circle at top right, var(--accent-soft), transparent 60%);
-      opacity: 0;
-      transition: opacity var(--transition-fast);
-      pointer-events: none;
-    }
-
-    .feature-card:hover::before {
-      opacity: 1;
-    }
-
-    .feature-icon {
-      width: 32px;
-      height: 32px;
-      border-radius: 12px;
-      background: rgba(227, 27, 35, 0.14);
-      border: 1px solid rgba(227, 27, 35, 0.4);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 12px;
-      font-size: 17px;
-    }
-
-    .feature-title {
-      font-size: 14px;
-      margin-bottom: 6px;
-    }
-
-    .feature-text {
-      font-size: 12px;
-      color: var(--muted);
-      margin-bottom: 10px;
-    }
-
-    .feature-tagline {
-      font-size: 11px;
-      color: var(--accent);
-    }
-
-    /* Área de demonstrações */
-
-    .demo-layout {
-      display: grid;
-      grid-template-columns: 1.2fr 1fr;
-      gap: 26px;
-      align-items: center;
-    }
-
-    .demo-gallery {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 10px;
-    }
-
-    .demo-frame {
-      border-radius: 18px;
-      background: #050509;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      overflow: hidden;
-      position: relative;
-      min-height: 150px;
-      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.9);
-    }
-
-    /* INDICAÇÃO: aqui você coloca prints de telas do sistema */
-    /* Exemplo:
-       <img src="assets/demo-visitantes.png" alt="Tela de visitantes" />
-    */
-
-    .demo-placeholder {
-      height: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 12px;
-      color: var(--muted);
-      padding: 14px;
-      text-align: center;
-    }
-
-    .demo-caption {
-      position: absolute;
-      left: 10px;
-      bottom: 10px;
-      font-size: 10px;
-      padding: 4px 8px;
-      border-radius: 999px;
-      background: rgba(0, 0, 0, 0.7);
-      border: 1px solid rgba(255, 255, 255, 0.16);
-    }
-
-    .demo-copy-title {
-      font-size: 18px;
-      letter-spacing: -0.03em;
-      margin-bottom: 10px;
-    }
-
-    .demo-copy-text {
-      font-size: 13px;
-      color: var(--muted);
-      margin-bottom: 16px;
-    }
-
-    .demo-highlights {
-      display: grid;
-      gap: 8px;
-      font-size: 12px;
-      color: var(--muted);
-    }
-
-    .demo-highlights span {
-      color: var(--accent);
-      font-weight: 600;
-    }
-
-    /* Bloco “Para Síndicos e Administradoras” */
-
-    .two-cols {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 20px;
-    }
-
-    .card-vertical {
-      background: radial-gradient(circle at top, #181824, #050509);
-      border-radius: var(--radius-lg);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      padding: 18px;
-      font-size: 13px;
-      box-shadow: 0 18px 48px rgba(0, 0, 0, 0.7);
-    }
-
-    .card-vertical h3 {
-      font-size: 15px;
-      margin-bottom: 6px;
-    }
-
-    .card-vertical p {
-      color: var(--muted);
-      margin-bottom: 10px;
-    }
-
-    .card-vertical ul {
-      list-style: none;
-      display: grid;
-      gap: 6px;
-      padding: 0;
-      margin: 0 0 8px;
-    }
-
-    .card-vertical li {
-      display: flex;
-      gap: 6px;
-      font-size: 12px;
-      color: var(--muted);
-    }
-
-    .card-vertical li::before {
-      content: "•";
-      color: var(--accent);
-      margin-top: 2px;
-    }
-
-    /* Formulários */
-
-    .forms-grid {
-      display: grid;
-      grid-template-columns: 1.1fr 0.9fr;
-      gap: 20px;
-      align-items: stretch;
-    }
-
-    .form-card {
-      background: linear-gradient(145deg, #161623, #050509);
-      border-radius: var(--radius-lg);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      padding: 18px;
-      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.8);
-    }
-
-    .form-title {
-      font-size: 15px;
-      margin-bottom: 4px;
-    }
-
-    .form-sub {
-      font-size: 12px;
-      color: var(--muted);
-      margin-bottom: 14px;
-    }
-
-    .form-row {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 10px;
-    }
-
-    .form-group {
-      margin-bottom: 10px;
-      font-size: 12px;
-    }
-
-    .form-group label {
-      display: block;
-      margin-bottom: 4px;
-      color: var(--muted);
-    }
-
-    .form-group input,
-    .form-group select,
-    .form-group textarea {
-      width: 100%;
-      border-radius: 999px;
-      border: 1px solid rgba(255, 255, 255, 0.16);
-      background: rgba(0, 0, 0, 0.55);
-      color: var(--text);
-      padding: 9px 11px;
-      font-size: 12px;
-      outline: none;
-      transition: border-color var(--transition-fast), box-shadow var(--transition-fast),
-        background var(--transition-fast);
-    }
-
-    .form-group textarea {
-      border-radius: 14px;
-      min-height: 70px;
-      resize: vertical;
-    }
-
-    .form-group input:focus,
-    .form-group select:focus,
-    .form-group textarea:focus {
-      border-color: var(--accent);
-      box-shadow: 0 0 0 1px rgba(227, 27, 35, 0.5);
-      background: rgba(0, 0, 0, 0.8);
-    }
-
-    .form-footer {
-      margin-top: 10px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 10px;
-      font-size: 11px;
-      color: var(--muted);
-    }
-
-    .form-whatsapp {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 11px;
-      color: #1bd741;
-    }
-
-    .form-whatsapp span.icon {
-      font-size: 14px;
-    }
-
-    /* Rodapé */
-
-    footer {
-      border-top: 1px solid rgba(255, 255, 255, 0.06);
-      padding: 24px 20px 26px;
-      margin-top: 20px;
-      font-size: 11px;
-      color: var(--muted);
-      background: radial-gradient(circle at top, #181824, #020208);
-    }
-
-    .footer-wrap {
-      max-width: 1120px;
-      margin: 0 auto;
-      display: flex;
-      justify-content: space-between;
-      gap: 16px;
-      flex-wrap: wrap;
-    }
-
-    .footer-brand {
-      display: flex;
-      gap: 10px;
-      align-items: center;
-    }
-
-    .footer-right {
-      display: flex;
-      gap: 16px;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: flex-end;
-    }
-
-    .footer-right a {
-      text-decoration: underline;
-    }
-
-    /* Responsivo */
-
-    @media (max-width: 900px) {
-      .nav-links {
-        display: none;
+      .hero-card-mobile-inner {
+        border-radius: 14px;
+        background: rgba(0, 0, 0, 0.6);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        padding: 10px;
+        display: grid;
+        gap: 8px;
+        font-size: 11px;
       }
 
-      .hero {
-        grid-template-columns: minmax(0, 1fr);
-        padding-top: 40px;
+      .tag-app {
+        padding: 3px 8px;
+        border-radius: 999px;
+        border: 1px solid rgba(255, 255, 255, 0.16);
+        background: rgba(255, 255, 255, 0.06);
+        font-size: 9px;
+        text-transform: uppercase;
+        letter-spacing: 0.14em;
       }
 
-      .hero-right {
-        order: -1;
+      .list-visitors {
+        display: grid;
+        gap: 6px;
       }
 
-      .section-header {
+      .visitor-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 6px 7px;
+        border-radius: 9px;
+        background: rgba(255, 255, 255, 0.02);
+        border: 1px solid rgba(255, 255, 255, 0.06);
+      }
+
+      .visitor-meta {
+        display: flex;
         flex-direction: column;
-        align-items: flex-start;
+        gap: 1px;
       }
 
-      .features-grid {
-        grid-template-columns: minmax(0, 1fr);
+      .visitor-name {
+        font-size: 11px;
+        font-weight: 600;
       }
 
-      .demo-layout,
-      .two-cols,
-      .forms-grid {
-        grid-template-columns: minmax(0, 1fr);
+      .visitor-tag {
+        font-size: 9px;
+        color: var(--muted);
       }
-    }
 
-    @media (max-width: 600px) {
-      .hero {
-        padding-bottom: 50px;
+      .visitor-status {
+        font-size: 9px;
+        padding: 3px 7px;
+        border-radius: 999px;
+        background: rgba(46, 212, 126, 0.12);
+        color: #8fffc4;
+        border: 1px solid rgba(46, 212, 126, 0.6);
+      }
+
+      .hero-card-footer {
+        margin-top: 10px;
+        display: flex;
+        justify-content: space-between;
+        font-size: 10px;
+        color: var(--muted);
+      }
+
+      .hero-card-footer span strong {
+        color: var(--accent);
+      }
+
+      /* Seções genéricas */
+
+      section {
+        scroll-margin-top: 80px;
       }
 
       .section-wrap {
-        padding-bottom: 50px;
+        max-width: 1120px;
+        margin: 0 auto;
+        padding: 40px 20px 70px;
       }
-    }
-  </style>
-</head>
-<body>
-<div class="page-wrap">
-  <header>
-    <div class="nav">
-      <div class="nav-left">
-        <div class="logo-mark">S</div>
-        <!-- INDICAÇÃO: troque "Sysgate" por seu logo/arte -->
-        <div class="logo-text">SYS<span>GATE</span> · CONDOMÍNIOS</div>
-      </div>
-      <nav class="nav-links">
-        <a href="#funcionalidades">Funcionalidades</a>
-        <a href="#demos">Demonstrações</a>
-        <a href="#publicos">Síndicos & Administradoras</a>
-        <a href="#contato">Contato</a>
-      </nav>
-      <div class="nav-ctas">
-        <button class="btn btn-outline" onclick="document.getElementById('contato').scrollIntoView({behavior:'smooth'})">
-          <span class="icon">☎</span> Falar agora
-        </button>
-        <button class="btn btn-primary" onclick="document.getElementById('contato').scrollIntoView({behavior:'smooth'})">
-          <span class="icon">⚡</span> Agendar demonstração
-        </button>
-      </div>
-    </div>
-  </header>
 
-  <!-- HERO -->
-  <main>
-    <section id="topo">
-      <div class="hero">
-        <div>
-          <div class="hero-kicker">
-            <span class="hero-kicker-dot"></span>
-            Plataforma para condomínios com ou sem porteiro
-          </div>
-          <h1 class="hero-title">
-            Controle total de <span>acesso, visitantes e encomendas</span> em um único lugar.
-          </h1>
-          <p class="hero-subtitle">
-            Sysgate é o painel do síndico e o aplicativo do morador para organizar entradas, saídas e entregas,
-            com histórico, fotos e notificações em tempo real.
-          </p>
-          <div class="hero-badges">
-            <div class="hero-badge">Condomínios com ou sem portaria física</div>
-            <div class="hero-badge">Integração com reconhecimento facial</div>
-            <div class="hero-badge">App para moradores controlarem seus visitantes</div>
-          </div>
-          <div class="hero-ctas">
-            <button class="btn btn-primary" onclick="document.getElementById('contato').scrollIntoView({behavior:'smooth'})">
-              <span class="icon">▶</span> Ver demonstração em 20 min
-            </button>
-            <button class="btn btn-outline" onclick="document.getElementById('demos').scrollIntoView({behavior:'smooth'})">
-              <span class="icon">👁</span> Ver telas da plataforma
-            </button>
-          </div>
-          <div class="hero-footnote">
-            Usado hoje em <span class="hero-highlight">condomínios residenciais e comerciais</span> para reduzir reclamações e acabar com “encomenda perdida”.
-          </div>
-        </div>
+      .section-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        gap: 20px;
+        margin-bottom: 26px;
+      }
 
-        <div class="hero-right">
-          <div class="hero-card reveal" data-delay="0">
-            <div class="hero-card-header">
-              <div class="hero-card-tag">
-                <span class="hero-card-tag-dot"></span>
-                Painel do síndico em tempo real
-              </div>
-              <div>Últimas 24h</div>
-            </div>
-            <div class="hero-card-main">
-              <div class="hero-card-preview">
-                <!-- INDICAÇÃO: trocar este bloco por imagem do painel web -->
-                <!-- <img src="assets/dashboard-sindico.png" alt="Dashboard Sysgate" /> -->
-                <div class="hero-card-preview-placeholder">
-                  <div class="hero-card-preview-top">
-                    <div class="pill">Condomínio Caiapó III</div>
-                    <div class="pill">Hoje</div>
-                  </div>
-                  <div class="hero-card-preview-grid">
-                    <div class="stat-chip">
-                      <div class="stat-label">Visitantes autorizados</div>
-                      <div class="stat-value">38</div>
-                    </div>
-                    <div class="stat-chip">
-                      <div class="stat-label">Encomendas entregues</div>
-                      <div class="stat-value">72</div>
-                    </div>
-                    <div class="stat-chip">
-                      <div class="stat-label">Alertas resolvidos</div>
-                      <div class="stat-value">14</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="hero-card-mobile">
-                <!-- INDICAÇÃO: trocar pelo mock/imagem do app do morador -->
-                <!-- <img src="assets/app-morador.png" alt="App Sysgate Morador" /> -->
-                <div class="hero-card-mobile-inner">
-                  <div class="tag-app">App Morador · Controle de Visitantes</div>
-                  <div class="list-visitors">
-                    <div class="visitor-item">
-                      <div class="visitor-meta">
-                        <div class="visitor-name">Carlos (Uber)</div>
-                        <div class="visitor-tag">Autorizado até 12:30</div>
-                      </div>
-                      <div class="visitor-status">A caminho</div>
-                    </div>
-                    <div class="visitor-item">
-                      <div class="visitor-meta">
-                        <div class="visitor-name">Marcela (Manicure)</div>
-                        <div class="visitor-tag">Visitante recorrente · Domingos</div>
-                      </div>
-                      <div class="visitor-status">Liberada</div>
-                    </div>
-                    <div class="visitor-item">
-                      <div class="visitor-meta">
-                        <div class="visitor-name">Encomenda #8241</div>
-                        <div class="visitor-tag">Foto registrada na portaria</div>
-                      </div>
-                      <div class="visitor-status">Entregue</div>
-                    </div>
-                  </div>
-                  <div class="hero-card-footer">
-                    <span>Morador libera <strong>visitantes</strong> e <strong>encomendas</strong> pelo app.</span>
-                    <span>Sem papel, sem rádio, sem confusão.</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div> <!-- hero-card -->
-        </div>
-      </div>
-    </section>
+      .section-title {
+        font-size: 22px;
+        letter-spacing: -0.03em;
+      }
 
-    <!-- FUNCIONALIDADES -->
-    <section id="funcionalidades">
-      <div class="section-wrap">
-        <div class="section-header reveal" data-delay="0">
-          <div>
-            <h2 class="section-title">Tudo o que o condomínio precisa em um painel só.</h2>
-          </div>
-          <p class="section-subtitle">
-            Sysgate centraliza cadastro de moradores, controle de acesso, registro de visitantes, encomendas com foto,
-            notificações e relatórios para assembleia. Pensado para síndicos e administradoras.
-          </p>
-        </div>
+      .section-subtitle {
+        font-size: 13px;
+        color: var(--muted);
+        max-width: 380px;
+      }
 
-        <div class="features-grid">
-          <article class="feature-card reveal" data-delay="0">
-            <div class="feature-icon">🚪</div>
-            <h3 class="feature-title">Controle de acesso completo</h3>
-            <p class="feature-text">
-              Cadastre moradores, veículos e visitantes. Integre com dispositivos de reconhecimento facial e libere
-              acessos de forma segura, com histórico centralizado.
-            </p>
-            <div class="feature-tagline">Ideal para condomínios com ou sem porteiro.</div>
-          </article>
+      /* Efeito de scroll (fade + slide) */
 
-          <article class="feature-card reveal" data-delay="100">
-            <div class="feature-icon">📦</div>
-            <h3 class="feature-title">Encomendas com foto e confirmação</h3>
-            <p class="feature-text">
-              Registre entregas com foto, horário e responsável. O morador recebe notificação no app e confirma a retirada,
-              evitando o famoso “sumiu na portaria”.
-            </p>
-            <div class="feature-tagline">Histórico completo para qualquer conferência.</div>
-          </article>
+      .reveal {
+        opacity: 0;
+        transform: translateY(30px);
+        transition:
+          opacity 0.7s ease-out,
+          transform 0.7s ease-out;
+      }
 
-          <article class="feature-card reveal" data-delay="200">
-            <div class="feature-icon">📱</div>
-            <h3 class="feature-title">App para moradores</h3>
-            <p class="feature-text">
-              Cada morador controla seus visitantes e encomendas pelo próprio celular: pré-cadastra visitas, recebe alertas
-              de entrega e consulta tudo em tempo real.
-            </p>
-            <div class="feature-tagline">Menos interfone, mais autonomia para o morador.</div>
-          </article>
+      .reveal.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
 
-          <article class="feature-card reveal" data-delay="300">
-            <div class="feature-icon">📊</div>
-            <h3 class="feature-title">Relatórios para assembleia</h3>
-            <p class="feature-text">
-              Gere relatórios de acessos, visitas e entregas em poucos cliques. Use dados reais na prestação de contas
-              e em decisões de segurança.
-            </p>
-            <div class="feature-tagline">Transparência total para conselho e moradores.</div>
-          </article>
+      /* Benefícios / Features */
 
-          <article class="feature-card reveal" data-delay="400">
-            <div class="feature-icon">🧑‍💼</div>
-            <h3 class="feature-title">Visão especial para síndico</h3>
-            <p class="feature-text">
-              Painel pensado para o dia a dia do síndico: visão geral de tudo que acontece, alertas, pendências, 
-              e troca rápida entre múltiplos condomínios administrados.
-            </p>
-            <div class="feature-tagline">Um cockpit para cada condomínio.</div>
-          </article>
+      .features-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 18px;
+      }
 
-          <article class="feature-card reveal" data-delay="500">
-            <div class="feature-icon">🤝</div>
-            <h3 class="feature-title">Administradoras no controle</h3>
-            <p class="feature-text">
-              Centralize vários condomínios em uma só plataforma, padronizando processos e reduzindo trabalho manual
-              da sua equipe.
-            </p>
-            <div class="feature-tagline">Escale sua carteira sem perder controle.</div>
-          </article>
-        </div>
-      </div>
-    </section>
+      .feature-card {
+        background: #111111;
+        border-radius: var(--radius-lg);
+        padding: 16px 16px 14px;
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        box-shadow: 0 16px 40px rgba(0, 0, 0, 0.65);
+        position: relative;
+        overflow: hidden;
+      }
 
-    <!-- DEMONSTRAÇÕES -->
-    <section id="demos">
-      <div class="section-wrap">
-        <div class="section-header reveal" data-delay="0">
-          <div>
-            <h2 class="section-title">Veja como a plataforma funciona na prática.</h2>
-          </div>
-          <p class="section-subtitle">
-            Separe alguns minutos para navegar pelas telas: painel do síndico, registro de visitantes, controle de
-            encomendas e o aplicativo do morador com tudo na palma da mão.
-          </p>
-        </div>
+      .feature-card::before {
+        content: "";
+        position: absolute;
+        inset: -40%;
+        background: radial-gradient(
+          circle at top right,
+          var(--accent-soft),
+          transparent 60%
+        );
+        opacity: 0;
+        transition: opacity var(--transition-fast);
+        pointer-events: none;
+      }
 
-        <div class="demo-layout">
-          <div class="demo-gallery">
-            <div class="demo-frame reveal" data-delay="0">
-              <!-- INDICAÇÃO: print do painel principal -->
-              <!-- <img src="assets/demo-dashboard.png" alt="Dashboard Sysgate" /> -->
-              <div class="demo-placeholder">
-                Espaço para imagem do painel web principal<br />
-                (Dashboard do síndico / visão geral do condomínio).
-              </div>
-              <div class="demo-caption">Painel do síndico</div>
-            </div>
+      .feature-card:hover::before {
+        opacity: 1;
+      }
 
-            <div class="demo-frame reveal" data-delay="100">
-              <!-- INDICAÇÃO: print da tela de visitantes -->
-              <!-- <img src="assets/demo-visitantes.png" alt="Tela de visitantes" /> -->
-              <div class="demo-placeholder">
-                Espaço para imagem da tela de visitantes<br />
-                (cadastro, autorizações, histórico).
-              </div>
-              <div class="demo-caption">Controle de visitantes</div>
-            </div>
+      .feature-icon {
+        width: 32px;
+        height: 32px;
+        border-radius: 12px;
+        background: rgba(227, 27, 35, 0.14);
+        border: 1px solid rgba(227, 27, 35, 0.4);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 12px;
+        font-size: 17px;
+      }
 
-            <div class="demo-frame reveal" data-delay="200">
-              <!-- INDICAÇÃO: print da tela de encomendas -->
-              <!-- <img src="assets/demo-encomendas.png" alt="Tela de encomendas" /> -->
-              <div class="demo-placeholder">
-                Espaço para imagem da tela de encomendas<br />
-                (foto, horário, status).
-              </div>
-              <div class="demo-caption">Encomendas com foto</div>
-            </div>
+      .feature-title {
+        font-size: 14px;
+        margin-bottom: 6px;
+      }
 
-            <div class="demo-frame reveal" data-delay="300">
-              <!-- INDICAÇÃO: print do app do morador -->
-              <!-- <img src="assets/demo-app-morador.png" alt="App Sysgate Morador" /> -->
-              <div class="demo-placeholder">
-                Espaço para imagem do aplicativo Sysgate Morador<br />
-                (controle de visitantes, encomendas, notificações).
-              </div>
-              <div class="demo-caption">App do morador</div>
-            </div>
-          </div>
+      .feature-text {
+        font-size: 12px;
+        color: var(--muted);
+        margin-bottom: 10px;
+      }
 
-          <div class="reveal" data-delay="200">
-            <h3 class="demo-copy-title">Aplicativo para o morador, cockpit para o síndico.</h3>
-            <p class="demo-copy-text">
-              Enquanto o síndico e a administradora enxergam tudo em um painel completo,
-              o morador cuida das próprias entradas e entregas pelo app. 
-              Ele pré-cadastra visitantes, acompanha quem entrou, recebe alerta de entrega e confirma retirada –
-              tudo pelo celular.
-            </p>
-            <div class="demo-highlights">
-              <div>• Morador controla <span>visitantes</span> e <span>encomendas</span> pelo app, sem depender de interfone o tempo todo.</div>
-              <div>• Síndico acompanha acessos, fotos de entregas e relatórios em tempo real no painel web.</div>
-              <div>• Administradora consegue gerenciar vários condomínios com a mesma experiência padronizada.</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+      .feature-tagline {
+        font-size: 11px;
+        color: var(--accent);
+      }
 
-    <!-- SÍNDICOS E ADMINISTRADORAS -->
-    <section id="publicos">
-      <div class="section-wrap">
-        <div class="section-header reveal" data-delay="0">
-          <div>
-            <h2 class="section-title">Feito sob medida para síndicos e administradoras.</h2>
-          </div>
-          <p class="section-subtitle">
-            Não é só “um sistema de portaria”. É uma solução focada em cortar reclamação,
-            organizar a rotina e dar dados reais para decisões de segurança e gestão.
-          </p>
-        </div>
+      /* Área de demonstrações */
 
-        <div class="two-cols">
-          <article class="card-vertical reveal" data-delay="0">
-            <h3>Para síndicos</h3>
-            <p>
-              Ideal para quem vive a rotina do condomínio e precisa resolver problemas de acesso, visitantes e encomendas
-              com rapidez e clareza.
-            </p>
-            <ul>
-              <li>Visão geral do dia em segundos: acessos, entregas, alertas.</li>
-              <li>Relatórios prontos para conselho e assembleia.</li>
-              <li>Menos interfone tocando e menos gente “batendo na porta” do síndico.</li>
-              <li>Funciona em condomínios com ou sem porteiro.</li>
-            </ul>
-            <button class="btn btn-outline" onclick="document.getElementById('contato').scrollIntoView({behavior:'smooth'})">
-              <span class="icon">👔</span> Sou síndico, quero ver na prática
-            </button>
-          </article>
+      .demo-layout {
+        display: grid;
+        grid-template-columns: 1.2fr 1fr;
+        gap: 26px;
+        align-items: center;
+      }
 
-          <article class="card-vertical reveal" data-delay="100">
-            <h3>Para administradoras</h3>
-            <p>
-              Pensado para quem gerencia uma carteira inteira de condomínios e precisa padronizar processos e relatórios,
-              sem aumentar a equipe.
-            </p>
-            <ul>
-              <li>Centralize vários condomínios em um só painel.</li>
-              <li>Padronize fluxo de visitantes, entregas e comunicação.</li>
-              <li>Reduza chamados operacionais com um app simples para moradores.</li>
-              <li>Integre facilmente novos condomínios à plataforma.</li>
-            </ul>
-            <button class="btn btn-outline" onclick="document.getElementById('contato').scrollIntoView({behavior:'smooth'})">
-              <span class="icon">🏢</span> Sou administradora, quero uma demo
-            </button>
-          </article>
-        </div>
-      </div>
-    </section>
+      .demo-gallery {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+      }
 
-    <!-- CONTATO / FORMULÁRIOS -->
-    <section id="contato">
-      <div class="section-wrap">
-        <div class="section-header reveal" data-delay="0">
-          <div>
-            <h2 class="section-title">Agende uma demonstração e veja no seu condomínio.</h2>
-          </div>
-          <p class="section-subtitle">
-            Em 20 minutos mostramos exatamente como o Sysgate funciona aplicado à sua realidade. 
-            Preencha um dos formulários abaixo que entramos em contato pelo WhatsApp.
-          </p>
-        </div>
+      .demo-frame {
+        border-radius: 18px;
+        background: #050509;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        overflow: hidden;
+        position: relative;
+        min-height: 150px;
+        box-shadow: 0 18px 40px rgba(0, 0, 0, 0.9);
+      }
 
-        <div class="forms-grid">
-          <!-- Formulário principal: agendar demo -->
-          <form class="form-card reveal" data-delay="0">
-            <h3 class="form-title">Quero agendar uma demonstração</h3>
-            <p class="form-sub">
-              Diga quem você é e qual condomínio representa. Usaremos esses dados só para falar sobre a demonstração.
-            </p>
+      /* INDICAÇÃO: aqui você coloca prints de telas do sistema */
+      /* Exemplo:
+       <img src="assets/demo-visitantes.png" alt="Tela de visitantes" />
+    */
 
-            <div class="form-row">
-              <div class="form-group">
-                <label for="nome">Nome completo</label>
-                <input type="text" id="nome" placeholder="Seu nome" required />
-              </div>
-              <div class="form-group">
-                <label for="whatsapp">WhatsApp</label>
-                <input type="tel" id="whatsapp" placeholder="(00) 00000-0000" required />
-              </div>
-            </div>
+      .demo-placeholder {
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 12px;
+        color: var(--muted);
+        padding: 14px;
+        text-align: center;
+      }
 
-            <div class="form-row">
-              <div class="form-group">
-                <label for="papel">Você é</label>
-                <select id="papel" required>
-                  <option value="">Selecione</option>
-                  <option>Síndico(a)</option>
-                  <option>Subsíndico(a)</option>
-                  <option>Administrador(a)</option>
-                  <option>Conselheiro(a)</option>
-                </select>
-              </div>
-              <div class="form-group">
-                <label for="condominio">Condomínio</label>
-                <input type="text" id="condominio" placeholder="Nome do condomínio" required />
-              </div>
-            </div>
+      .demo-caption {
+        position: absolute;
+        left: 10px;
+        bottom: 10px;
+        font-size: 10px;
+        padding: 4px 8px;
+        border-radius: 999px;
+        background: rgba(0, 0, 0, 0.7);
+        border: 1px solid rgba(255, 255, 255, 0.16);
+      }
 
-            <div class="form-row">
-              <div class="form-group">
-                <label for="cidade">Cidade/UF</label>
-                <input type="text" id="cidade" placeholder="Campinas/SP" />
-              </div>
-              <div class="form-group">
-                <label for="porte">Porte do condomínio</label>
-                <select id="porte">
-                  <option value="">Selecione</option>
-                  <option>Até 50 unidades</option>
-                  <option>51 a 150 unidades</option>
-                  <option>Acima de 150 unidades</option>
-                </select>
-              </div>
-            </div>
+      .demo-copy-title {
+        font-size: 18px;
+        letter-spacing: -0.03em;
+        margin-bottom: 10px;
+      }
 
-            <div class="form-group">
-              <label for="mensagem">O que mais incomoda hoje?</label>
-              <textarea id="mensagem" placeholder="Ex: encomenda some, não sei quem entrou, muita reclamação de portaria..."></textarea>
-            </div>
+      .demo-copy-text {
+        font-size: 13px;
+        color: var(--muted);
+        margin-bottom: 16px;
+      }
 
-            <div class="form-footer">
-              <button class="btn btn-primary" type="submit">
-                <span class="icon">⚡</span> Enviar e combinar horário
-              </button>
-              <div>
-                <div>Você recebe a confirmação pelo WhatsApp.</div>
-                <a class="form-whatsapp" href="#">
-                  <span class="icon">💬</span> Ou clique aqui para falar direto
-                </a>
-              </div>
-            </div>
-          </form>
+      .demo-highlights {
+        display: grid;
+        gap: 8px;
+        font-size: 12px;
+        color: var(--muted);
+      }
 
-          <!-- Form secundário: contato rápido -->
-          <form class="form-card reveal" data-delay="150">
-            <h3 class="form-title">Contato rápido</h3>
-            <p class="form-sub">
-              Tem uma pergunta objetiva ou quer falar sobre integração, parceria ou suporte?
-              Preencha abaixo e retornamos em breve.
-            </p>
+      .demo-highlights span {
+        color: var(--accent);
+        font-weight: 600;
+      }
 
-            <div class="form-group">
-              <label for="contato-nome">Nome</label>
-              <input type="text" id="contato-nome" placeholder="Seu nome" />
-            </div>
-            <div class="form-group">
-              <label for="contato-email">E-mail</label>
-              <input type="email" id="contato-email" placeholder="seuemail@exemplo.com" />
-            </div>
-            <div class="form-group">
-              <label for="contato-assunto">Assunto</label>
-              <select id="contato-assunto">
-                <option>Suporte / Cliente atual</option>
-                <option>Quero contratar a Sysgate</option>
-                <option>Integrações técnicas</option>
-                <option>Parcerias / Comercial</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label for="contato-msg">Mensagem</label>
-              <textarea id="contato-msg" placeholder="Descreva em poucas linhas como podemos ajudar."></textarea>
-            </div>
-            <div class="form-footer">
-              <button class="btn btn-outline" type="submit">
-                <span class="icon">✉</span> Enviar mensagem
-              </button>
-            </div>
-          </form>
-        </div>
-      </div>
-    </section>
-  </main>
+      /* Bloco “Para Síndicos e Administradoras” */
 
-  <footer>
-    <div class="footer-wrap">
-      <div class="footer-brand">
-        <div class="logo-mark">S</div>
-        <div>
-          Sysgate · Plataforma para condomínios<br />
-          <span>Campinas/SP · Brasil</span>
-        </div>
-      </div>
-      <div class="footer-right">
-        <div>© <span id="year"></span> Sysgate. Todos os direitos reservados.</div>
-        <a href="#topo">Voltar ao topo</a>
-      </div>
-    </div>
-  </footer>
-</div>
+      .two-cols {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 20px;
+      }
 
-<script>
-  // Atualiza ano no rodapé
-  document.getElementById("year").textContent = new Date().getFullYear();
+      .card-vertical {
+        background: radial-gradient(circle at top, #181824, #050509);
+        border-radius: var(--radius-lg);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        padding: 18px;
+        font-size: 13px;
+        box-shadow: 0 18px 48px rgba(0, 0, 0, 0.7);
+      }
 
-  // Efeito reveal on scroll
-  const revealEls = document.querySelectorAll(".reveal, .hero-card");
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          const el = entry.target;
-          const delay = el.getAttribute("data-delay") || 0;
-          setTimeout(() => {
-            el.classList.add("visible");
-          }, +delay);
-          observer.unobserve(el);
+      .card-vertical h3 {
+        font-size: 15px;
+        margin-bottom: 6px;
+      }
+
+      .card-vertical p {
+        color: var(--muted);
+        margin-bottom: 10px;
+      }
+
+      .card-vertical ul {
+        list-style: none;
+        display: grid;
+        gap: 6px;
+        padding: 0;
+        margin: 0 0 8px;
+      }
+
+      .card-vertical li {
+        display: flex;
+        gap: 6px;
+        font-size: 12px;
+        color: var(--muted);
+      }
+
+      .card-vertical li::before {
+        content: "•";
+        color: var(--accent);
+        margin-top: 2px;
+      }
+
+      /* Formulários */
+
+      .forms-grid {
+        display: grid;
+        grid-template-columns: 1.1fr 0.9fr;
+        gap: 20px;
+        align-items: stretch;
+      }
+
+      .form-card {
+        background: linear-gradient(145deg, #161623, #050509);
+        border-radius: var(--radius-lg);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        padding: 18px;
+        box-shadow: 0 24px 60px rgba(0, 0, 0, 0.8);
+      }
+
+      .form-title {
+        font-size: 15px;
+        margin-bottom: 4px;
+      }
+
+      .form-sub {
+        font-size: 12px;
+        color: var(--muted);
+        margin-bottom: 14px;
+      }
+
+      .form-row {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+      }
+
+      .form-group {
+        margin-bottom: 10px;
+        font-size: 12px;
+      }
+
+      .form-group label {
+        display: block;
+        margin-bottom: 4px;
+        color: var(--muted);
+      }
+
+      .form-group input,
+      .form-group select,
+      .form-group textarea {
+        width: 100%;
+        border-radius: 999px;
+        border: 1px solid rgba(255, 255, 255, 0.16);
+        background: rgba(0, 0, 0, 0.55);
+        color: var(--text);
+        padding: 9px 11px;
+        font-size: 12px;
+        outline: none;
+        transition:
+          border-color var(--transition-fast),
+          box-shadow var(--transition-fast),
+          background var(--transition-fast);
+      }
+
+      .form-group textarea {
+        border-radius: 14px;
+        min-height: 70px;
+        resize: vertical;
+      }
+
+      .form-group input:focus,
+      .form-group select:focus,
+      .form-group textarea:focus {
+        border-color: var(--accent);
+        box-shadow: 0 0 0 1px rgba(227, 27, 35, 0.5);
+        background: rgba(0, 0, 0, 0.8);
+      }
+
+      .form-footer {
+        margin-top: 10px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 10px;
+        font-size: 11px;
+        color: var(--muted);
+      }
+
+      .form-whatsapp {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 11px;
+        color: #1bd741;
+      }
+
+      .form-whatsapp span.icon {
+        font-size: 14px;
+      }
+
+      /* Rodapé */
+
+      footer {
+        border-top: 1px solid rgba(255, 255, 255, 0.06);
+        padding: 24px 20px 26px;
+        margin-top: 20px;
+        font-size: 11px;
+        color: var(--muted);
+        background: radial-gradient(circle at top, #181824, #020208);
+      }
+
+      .footer-wrap {
+        max-width: 1120px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        gap: 16px;
+        flex-wrap: wrap;
+      }
+
+      .footer-brand {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+      }
+
+      .footer-right {
+        display: flex;
+        gap: 16px;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: flex-end;
+      }
+
+      .footer-right a {
+        text-decoration: underline;
+      }
+
+      /* Responsivo */
+
+      @media (max-width: 900px) {
+        .nav-links {
+          display: none;
         }
-      });
-    },
-    { threshold: 0.15 }
-  );
-  revealEls.forEach((el) => observer.observe(el));
-</script>
-</body>
+
+        .hero {
+          grid-template-columns: minmax(0, 1fr);
+          padding-top: 40px;
+        }
+
+        .hero-right {
+          order: -1;
+        }
+
+        .section-header {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+
+        .features-grid {
+          grid-template-columns: minmax(0, 1fr);
+        }
+
+        .demo-layout,
+        .two-cols,
+        .forms-grid {
+          grid-template-columns: minmax(0, 1fr);
+        }
+      }
+
+      @media (max-width: 600px) {
+        .hero {
+          padding-bottom: 50px;
+        }
+
+        .section-wrap {
+          padding-bottom: 50px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page-wrap">
+      <header>
+        <div class="nav">
+          <div class="nav-left">
+             <img src="assets/logo-sysgate.png" alt="Sysgate" style="height:32px;" />
+          </div>
+          <nav class="nav-links">
+            <a href="#funcionalidades">Funcionalidades</a>
+            <a href="#demos">Demonstrações</a>
+            <a href="#publicos">Síndicos & Administradoras</a>
+            <a href="#contato">Contato</a>
+          </nav>
+          <div class="nav-ctas">
+            <button
+              class="btn btn-outline"
+              onclick="
+                document
+                  .getElementById('contato')
+                  .scrollIntoView({ behavior: 'smooth' })
+              "
+            >
+              <span class="icon">☎</span> Falar agora
+            </button>
+            <button
+              class="btn btn-primary"
+              onclick="
+                document
+                  .getElementById('contato')
+                  .scrollIntoView({ behavior: 'smooth' })
+              "
+            >
+              <span class="icon">⚡</span> Agendar demonstração
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <!-- HERO -->
+      <main>
+        <section id="topo">
+          <div class="hero">
+            <div>
+              <div class="hero-kicker">
+                <span class="hero-kicker-dot"></span>
+                Plataforma para condomínios com ou sem porteiro
+              </div>
+              <h1 class="hero-title">
+                Controle total de
+                <span>acesso, visitantes e encomendas</span> em um único lugar.
+              </h1>
+              <p class="hero-subtitle">
+                Sysgate é o painel do síndico e o aplicativo do morador para
+                organizar entradas, saídas e entregas, com histórico, fotos e
+                notificações em tempo real.
+              </p>
+              <div class="hero-badges">
+                <div class="hero-badge">
+                  Condomínios com ou sem portaria física
+                </div>
+                <div class="hero-badge">
+                  Integração com reconhecimento facial
+                </div>
+                <div class="hero-badge">
+                  App para moradores controlarem seus visitantes
+                </div>
+              </div>
+              <div class="hero-ctas">
+                <button
+                  class="btn btn-primary"
+                  onclick="
+                    document
+                      .getElementById('contato')
+                      .scrollIntoView({ behavior: 'smooth' })
+                  "
+                >
+                  <span class="icon">▶</span> Ver demonstração em 20 min
+                </button>
+                <button
+                  class="btn btn-outline"
+                  onclick="
+                    document
+                      .getElementById('demos')
+                      .scrollIntoView({ behavior: 'smooth' })
+                  "
+                >
+                  <span class="icon">👁</span> Ver telas da plataforma
+                </button>
+              </div>
+              <div class="hero-footnote">
+                Usado hoje em
+                <span class="hero-highlight"
+                  >condomínios residenciais e comerciais</span
+                >
+                para reduzir reclamações e acabar com “encomenda perdida”.
+              </div>
+            </div>
+
+            <div class="hero-right">
+              <div class="hero-card reveal" data-delay="0">
+                <div class="hero-card-header">
+                  <div class="hero-card-tag">
+                    <span class="hero-card-tag-dot"></span>
+                    Painel do síndico em tempo real
+                  </div>
+                  <div>Últimas 24h</div>
+                </div>
+                <div class="hero-card-main">
+                  <div class="hero-card-preview">
+                    <!-- INDICAÇÃO: trocar este bloco por imagem do painel web -->
+                    <!-- <img src="assets/dashboard-sindico.png" alt="Dashboard Sysgate" /> -->
+                    <div class="hero-card-preview-placeholder">
+                      <div class="hero-card-preview-top">
+                        <div class="pill">Condomínio Caiapó III</div>
+                        <div class="pill">Hoje</div>
+                      </div>
+                      <div class="hero-card-preview-grid">
+                        <div class="stat-chip">
+                          <div class="stat-label">Visitantes autorizados</div>
+                          <div class="stat-value">38</div>
+                        </div>
+                        <div class="stat-chip">
+                          <div class="stat-label">Encomendas entregues</div>
+                          <div class="stat-value">72</div>
+                        </div>
+                        <div class="stat-chip">
+                          <div class="stat-label">Alertas resolvidos</div>
+                          <div class="stat-value">14</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="hero-card-mobile">
+                    <!-- INDICAÇÃO: trocar pelo mock/imagem do app do morador -->
+                    <!-- <img src="assets/app-morador.png" alt="App Sysgate Morador" /> -->
+                    <div class="hero-card-mobile-inner">
+                      <div class="tag-app">
+                        App Morador · Controle de Visitantes
+                      </div>
+                      <div class="list-visitors">
+                        <div class="visitor-item">
+                          <div class="visitor-meta">
+                            <div class="visitor-name">Carlos (Uber)</div>
+                            <div class="visitor-tag">Autorizado até 12:30</div>
+                          </div>
+                          <div class="visitor-status">A caminho</div>
+                        </div>
+                        <div class="visitor-item">
+                          <div class="visitor-meta">
+                            <div class="visitor-name">Marcela (Manicure)</div>
+                            <div class="visitor-tag">
+                              Visitante recorrente · Domingos
+                            </div>
+                          </div>
+                          <div class="visitor-status">Liberada</div>
+                        </div>
+                        <div class="visitor-item">
+                          <div class="visitor-meta">
+                            <div class="visitor-name">Encomenda #8241</div>
+                            <div class="visitor-tag">
+                              Foto registrada na portaria
+                            </div>
+                          </div>
+                          <div class="visitor-status">Entregue</div>
+                        </div>
+                      </div>
+                      <div class="hero-card-footer">
+                        <span
+                          >Morador libera <strong>visitantes</strong> e
+                          <strong>encomendas</strong> pelo app.</span
+                        >
+                        <span>Sem papel, sem rádio, sem confusão.</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- hero-card -->
+            </div>
+          </div>
+        </section>
+
+        <!-- FUNCIONALIDADES -->
+        <section id="funcionalidades">
+          <div class="section-wrap">
+            <div class="section-header reveal" data-delay="0">
+              <div>
+                <h2 class="section-title">
+                  Tudo o que o condomínio precisa em um painel só.
+                </h2>
+              </div>
+              <p class="section-subtitle">
+                Sysgate centraliza cadastro de moradores, controle de acesso,
+                registro de visitantes, encomendas com foto, notificações e
+                relatórios para assembleia. Pensado para síndicos e
+                administradoras.
+              </p>
+            </div>
+
+            <div class="features-grid">
+              <article class="feature-card reveal" data-delay="0">
+                <div class="feature-icon">🚪</div>
+                <h3 class="feature-title">Controle de acesso completo</h3>
+                <p class="feature-text">
+                  Cadastre moradores, veículos e visitantes. Integre com
+                  dispositivos de reconhecimento facial e libere acessos de
+                  forma segura, com histórico centralizado.
+                </p>
+                <div class="feature-tagline">
+                  Ideal para condomínios com ou sem porteiro.
+                </div>
+              </article>
+
+              <article class="feature-card reveal" data-delay="100">
+                <div class="feature-icon">📦</div>
+                <h3 class="feature-title">Encomendas com foto e confirmação</h3>
+                <p class="feature-text">
+                  Registre entregas com foto, horário e responsável. O morador
+                  recebe notificação no app e confirma a retirada, evitando o
+                  famoso “sumiu na portaria”.
+                </p>
+                <div class="feature-tagline">
+                  Histórico completo para qualquer conferência.
+                </div>
+              </article>
+
+              <article class="feature-card reveal" data-delay="200">
+                <div class="feature-icon">📱</div>
+                <h3 class="feature-title">App para moradores</h3>
+                <p class="feature-text">
+                  Cada morador controla seus visitantes e encomendas pelo
+                  próprio celular: pré-cadastra visitas, recebe alertas de
+                  entrega e consulta tudo em tempo real.
+                </p>
+                <div class="feature-tagline">
+                  Menos interfone, mais autonomia para o morador.
+                </div>
+              </article>
+
+              <article class="feature-card reveal" data-delay="300">
+                <div class="feature-icon">📊</div>
+                <h3 class="feature-title">Relatórios para assembleia</h3>
+                <p class="feature-text">
+                  Gere relatórios de acessos, visitas e entregas em poucos
+                  cliques. Use dados reais na prestação de contas e em decisões
+                  de segurança.
+                </p>
+                <div class="feature-tagline">
+                  Transparência total para conselho e moradores.
+                </div>
+              </article>
+
+              <article class="feature-card reveal" data-delay="400">
+                <div class="feature-icon">🧑‍💼</div>
+                <h3 class="feature-title">Visão especial para síndico</h3>
+                <p class="feature-text">
+                  Painel pensado para o dia a dia do síndico: visão geral de
+                  tudo que acontece, alertas, pendências, e troca rápida entre
+                  múltiplos condomínios administrados.
+                </p>
+                <div class="feature-tagline">
+                  Um cockpit para cada condomínio.
+                </div>
+              </article>
+
+              <article class="feature-card reveal" data-delay="500">
+                <div class="feature-icon">🤝</div>
+                <h3 class="feature-title">Administradoras no controle</h3>
+                <p class="feature-text">
+                  Centralize vários condomínios em uma só plataforma,
+                  padronizando processos e reduzindo trabalho manual da sua
+                  equipe.
+                </p>
+                <div class="feature-tagline">
+                  Escale sua carteira sem perder controle.
+                </div>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <!-- DEMONSTRAÇÕES -->
+        <section id="demos">
+          <div class="section-wrap">
+            <div class="section-header reveal" data-delay="0">
+              <div>
+                <h2 class="section-title">
+                  Veja como a plataforma funciona na prática.
+                </h2>
+              </div>
+              <p class="section-subtitle">
+                Separe alguns minutos para navegar pelas telas: painel do
+                síndico, registro de visitantes, controle de encomendas e o
+                aplicativo do morador com tudo na palma da mão.
+              </p>
+            </div>
+
+            <div class="demo-layout">
+              <div class="demo-gallery">
+                <div class="demo-frame reveal" data-delay="0">
+                  <!-- INDICAÇÃO: print do painel principal -->
+                  <!-- <img src="assets/demo-dashboard.png" alt="Dashboard Sysgate" /> -->
+                  <div class="demo-placeholder">
+                    Espaço para imagem do painel web principal<br />
+                    (Dashboard do síndico / visão geral do condomínio).
+                  </div>
+                  <div class="demo-caption">Painel do síndico</div>
+                </div>
+
+                <div class="demo-frame reveal" data-delay="100">
+                  <!-- INDICAÇÃO: print da tela de visitantes -->
+                  <!-- <img src="assets/demo-visitantes.png" alt="Tela de visitantes" /> -->
+                  <div class="demo-placeholder">
+                    Espaço para imagem da tela de visitantes<br />
+                    (cadastro, autorizações, histórico).
+                  </div>
+                  <div class="demo-caption">Controle de visitantes</div>
+                </div>
+
+                <div class="demo-frame reveal" data-delay="200">
+                  <!-- INDICAÇÃO: print da tela de encomendas -->
+                  <!-- <img src="assets/demo-encomendas.png" alt="Tela de encomendas" /> -->
+                  <div class="demo-placeholder">
+                    Espaço para imagem da tela de encomendas<br />
+                    (foto, horário, status).
+                  </div>
+                  <div class="demo-caption">Encomendas com foto</div>
+                </div>
+
+                <div class="demo-frame reveal" data-delay="300">
+                  <!-- INDICAÇÃO: print do app do morador -->
+                  <!-- <img src="assets/demo-app-morador.png" alt="App Sysgate Morador" /> -->
+                  <div class="demo-placeholder">
+                    Espaço para imagem do aplicativo Sysgate Morador<br />
+                    (controle de visitantes, encomendas, notificações).
+                  </div>
+                  <div class="demo-caption">App do morador</div>
+                </div>
+              </div>
+
+              <div class="reveal" data-delay="200">
+                <h3 class="demo-copy-title">
+                  Aplicativo para o morador, cockpit para o síndico.
+                </h3>
+                <p class="demo-copy-text">
+                  Enquanto o síndico e a administradora enxergam tudo em um
+                  painel completo, o morador cuida das próprias entradas e
+                  entregas pelo app. Ele pré-cadastra visitantes, acompanha quem
+                  entrou, recebe alerta de entrega e confirma retirada – tudo
+                  pelo celular.
+                </p>
+                <div class="demo-highlights">
+                  <div>
+                    • Morador controla <span>visitantes</span> e
+                    <span>encomendas</span> pelo app, sem depender de interfone
+                    o tempo todo.
+                  </div>
+                  <div>
+                    • Síndico acompanha acessos, fotos de entregas e relatórios
+                    em tempo real no painel web.
+                  </div>
+                  <div>
+                    • Administradora consegue gerenciar vários condomínios com a
+                    mesma experiência padronizada.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- SÍNDICOS E ADMINISTRADORAS -->
+        <section id="publicos">
+          <div class="section-wrap">
+            <div class="section-header reveal" data-delay="0">
+              <div>
+                <h2 class="section-title">
+                  Feito sob medida para síndicos e administradoras.
+                </h2>
+              </div>
+              <p class="section-subtitle">
+                Não é só “um sistema de portaria”. É uma solução focada em
+                cortar reclamação, organizar a rotina e dar dados reais para
+                decisões de segurança e gestão.
+              </p>
+            </div>
+
+            <div class="two-cols">
+              <article class="card-vertical reveal" data-delay="0">
+                <h3>Para síndicos</h3>
+                <p>
+                  Ideal para quem vive a rotina do condomínio e precisa resolver
+                  problemas de acesso, visitantes e encomendas com rapidez e
+                  clareza.
+                </p>
+                <ul>
+                  <li>
+                    Visão geral do dia em segundos: acessos, entregas, alertas.
+                  </li>
+                  <li>Relatórios prontos para conselho e assembleia.</li>
+                  <li>
+                    Menos interfone tocando e menos gente “batendo na porta” do
+                    síndico.
+                  </li>
+                  <li>Funciona em condomínios com ou sem porteiro.</li>
+                </ul>
+                <button
+                  class="btn btn-outline"
+                  onclick="
+                    document
+                      .getElementById('contato')
+                      .scrollIntoView({ behavior: 'smooth' })
+                  "
+                >
+                  <span class="icon">👔</span> Sou síndico, quero ver na prática
+                </button>
+              </article>
+
+              <article class="card-vertical reveal" data-delay="100">
+                <h3>Para administradoras</h3>
+                <p>
+                  Pensado para quem gerencia uma carteira inteira de condomínios
+                  e precisa padronizar processos e relatórios, sem aumentar a
+                  equipe.
+                </p>
+                <ul>
+                  <li>Centralize vários condomínios em um só painel.</li>
+                  <li>
+                    Padronize fluxo de visitantes, entregas e comunicação.
+                  </li>
+                  <li>
+                    Reduza chamados operacionais com um app simples para
+                    moradores.
+                  </li>
+                  <li>Integre facilmente novos condomínios à plataforma.</li>
+                </ul>
+                <button
+                  class="btn btn-outline"
+                  onclick="
+                    document
+                      .getElementById('contato')
+                      .scrollIntoView({ behavior: 'smooth' })
+                  "
+                >
+                  <span class="icon">🏢</span> Sou administradora, quero uma
+                  demo
+                </button>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <!-- CONTATO / FORMULÁRIOS -->
+        <section id="contato">
+          <div class="section-wrap">
+            <div class="section-header reveal" data-delay="0">
+              <div>
+                <h2 class="section-title">
+                  Agende uma demonstração e veja no seu condomínio.
+                </h2>
+              </div>
+              <p class="section-subtitle">
+                Em 20 minutos mostramos exatamente como o Sysgate funciona
+                aplicado à sua realidade. Preencha um dos formulários abaixo que
+                entramos em contato pelo WhatsApp.
+              </p>
+            </div>
+
+            <div class="forms-grid">
+              <!-- Formulário principal: agendar demo -->
+              <form class="form-card reveal" data-delay="0">
+                <h3 class="form-title">Quero agendar uma demonstração</h3>
+                <p class="form-sub">
+                  Diga quem você é e qual condomínio representa. Usaremos esses
+                  dados só para falar sobre a demonstração.
+                </p>
+
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="nome">Nome completo</label>
+                    <input
+                      type="text"
+                      id="nome"
+                      placeholder="Seu nome"
+                      required
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label for="whatsapp">WhatsApp</label>
+                    <input
+                      type="tel"
+                      id="whatsapp"
+                      placeholder="(00) 00000-0000"
+                      required
+                    />
+                  </div>
+                </div>
+
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="papel">Você é</label>
+                    <select id="papel" required>
+                      <option value="">Selecione</option>
+                      <option>Síndico(a)</option>
+                      <option>Subsíndico(a)</option>
+                      <option>Administrador(a)</option>
+                      <option>Conselheiro(a)</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label for="condominio">Condomínio</label>
+                    <input
+                      type="text"
+                      id="condominio"
+                      placeholder="Nome do condomínio"
+                      required
+                    />
+                  </div>
+                </div>
+
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="cidade">Cidade/UF</label>
+                    <input type="text" id="cidade" placeholder="Campinas/SP" />
+                  </div>
+                  <div class="form-group">
+                    <label for="porte">Porte do condomínio</label>
+                    <select id="porte">
+                      <option value="">Selecione</option>
+                      <option>Até 50 unidades</option>
+                      <option>51 a 150 unidades</option>
+                      <option>Acima de 150 unidades</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="mensagem">O que mais incomoda hoje?</label>
+                  <textarea
+                    id="mensagem"
+                    placeholder="Ex: encomenda some, não sei quem entrou, muita reclamação de portaria..."
+                  ></textarea>
+                </div>
+
+                <div class="form-footer">
+                  <button class="btn btn-primary" type="submit">
+                    <span class="icon">⚡</span> Enviar e combinar horário
+                  </button>
+                  <div>
+                    <div>Você recebe a confirmação pelo WhatsApp.</div>
+                    <a class="form-whatsapp" href="#">
+                      <span class="icon">💬</span> Ou clique aqui para falar
+                      direto
+                    </a>
+                  </div>
+                </div>
+              </form>
+
+              <!-- Form secundário: contato rápido -->
+              <form class="form-card reveal" data-delay="150">
+                <h3 class="form-title">Contato rápido</h3>
+                <p class="form-sub">
+                  Tem uma pergunta objetiva ou quer falar sobre integração,
+                  parceria ou suporte? Preencha abaixo e retornamos em breve.
+                </p>
+
+                <div class="form-group">
+                  <label for="contato-nome">Nome</label>
+                  <input type="text" id="contato-nome" placeholder="Seu nome" />
+                </div>
+                <div class="form-group">
+                  <label for="contato-email">E-mail</label>
+                  <input
+                    type="email"
+                    id="contato-email"
+                    placeholder="seuemail@exemplo.com"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="contato-assunto">Assunto</label>
+                  <select id="contato-assunto">
+                    <option>Suporte / Cliente atual</option>
+                    <option>Quero contratar a Sysgate</option>
+                    <option>Integrações técnicas</option>
+                    <option>Parcerias / Comercial</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="contato-msg">Mensagem</label>
+                  <textarea
+                    id="contato-msg"
+                    placeholder="Descreva em poucas linhas como podemos ajudar."
+                  ></textarea>
+                </div>
+                <div class="form-footer">
+                  <button class="btn btn-outline" type="submit">
+                    <span class="icon">✉</span> Enviar mensagem
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer>
+        <div class="footer-wrap">
+          <div class="footer-brand">
+            <div class="logo-mark">S</div>
+            <div>
+              Sysgate · Plataforma para condomínios<br />
+              <span>Campinas/SP · Brasil</span>
+            </div>
+          </div>
+          <div class="footer-right">
+            <div>
+              © <span id="year"></span> Sysgate. Todos os direitos reservados.
+            </div>
+            <a href="#topo">Voltar ao topo</a>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script>
+      // Atualiza ano no rodapé
+      document.getElementById("year").textContent = new Date().getFullYear();
+
+      // Efeito reveal on scroll
+      const revealEls = document.querySelectorAll(".reveal, .hero-card");
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              const el = entry.target;
+              const delay = el.getAttribute("data-delay") || 0;
+              setTimeout(() => {
+                el.classList.add("visible");
+              }, +delay);
+              observer.unobserve(el);
+            }
+          });
+        },
+        { threshold: 0.15 },
+      );
+      revealEls.forEach((el) => observer.observe(el));
+    </script>
+  </body>
 </html>
