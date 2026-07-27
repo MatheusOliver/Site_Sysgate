@@ -1,0 +1,10 @@
+{
+  "redirects": [
+    { "source": "/politica-de-privacidade", "destination": "/privacidade.html", "permanent": true },
+    { "source": "/planos", "destination": "/", "permanent": true },
+    { "source": "/licencas", "destination": "/", "permanent": true },
+    { "source": "/ajuda", "destination": "/", "permanent": true },
+    { "source": "/orçamento", "destination": "/", "permanent": true },
+    { "source": "/soluções", "destination": "/", "permanent": true }
+  ]
+}
