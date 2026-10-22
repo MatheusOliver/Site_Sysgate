@@ -68,6 +68,26 @@
         "url": "https://www.sysgate.com.br/"
       }
     </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "VideoObject",
+        "name": "Sysgate: da portaria à retirada com QR Code",
+        "description": "Demonstração de 15 segundos do sistema de portaria Sysgate: o porteiro registra a encomenda no portal, o morador é avisado no app e retira com QR Code.",
+        "thumbnailUrl": "https://www.sysgate.com.br/assets/sysgate-demo-encomenda.jpg",
+        "uploadDate": "2026-10-22",
+        "duration": "PT15S",
+        "contentUrl": "https://www.sysgate.com.br/assets/sysgate-demo-encomenda.mp4",
+        "publisher": {
+          "@type": "Organization",
+          "name": "Sysgate",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://www.sysgate.com.br/assets/logo-sysgate.png"
+          }
+        }
+      }
+    </script>
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -496,6 +516,30 @@
               </p>
             </div>
 
+            <figure class="demo-video reveal" data-delay="0">
+              <video
+                id="demoVideo"
+                class="demo-video-player"
+                width="1920"
+                height="1080"
+                muted
+                loop
+                playsinline
+                controls
+                preload="none"
+                poster="assets/sysgate-demo-encomenda.jpg"
+                controlslist="nodownload noplaybackrate"
+                disablepictureinpicture
+                aria-label="Vídeo de demonstração do Sysgate: encomenda registrada no portal da portaria, aviso no app do morador e retirada com QR Code"
+              >
+                <source src="assets/sysgate-demo-encomenda.mp4" type="video/mp4" />
+              </video>
+              <figcaption class="demo-video-caption">
+                O fluxo de uma encomenda no Sysgate: registro na portaria, aviso
+                no app do morador e retirada com QR Code.
+              </figcaption>
+            </figure>
+
             <div class="demo-panel reveal" data-delay="0">
               <div class="demo-panel-icon">
                 <svg class="icon" width="26" height="26"><use href="#i-play"/></svg>
@@ -771,6 +815,24 @@
         { threshold: 0.15 },
       );
       revealEls.forEach((el) => observer.observe(el));
+
+      const demoVideo = document.getElementById("demoVideo");
+      const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (demoVideo && "IntersectionObserver" in window && !reduceMotion) {
+        const videoObserver = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                demoVideo.play().catch(() => {});
+              } else {
+                demoVideo.pause();
+              }
+            });
+          },
+          { threshold: 0.35 },
+        );
+        videoObserver.observe(demoVideo);
+      }
     </script>
     <script src="assets/cookie-consent.js" defer></script>
   </body>

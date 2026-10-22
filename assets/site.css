@@ -1020,6 +1020,28 @@ section {
 
 /* Área de demonstrações */
 
+.demo-video {
+  max-width: 1040px;
+  margin: 0 auto 40px;
+}
+
+.demo-video-player {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  border-radius: var(--radius-xl);
+  background: var(--ink);
+  box-shadow: var(--shadow-strong);
+}
+
+.demo-video-caption {
+  margin-top: 14px;
+  text-align: center;
+  font-size: 13.5px;
+  color: var(--muted);
+}
+
 .demo-panel {
   max-width: 780px;
   margin: 0 auto;

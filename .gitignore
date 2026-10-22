@@ -1,0 +1,5 @@
+# Harvey (agente de vendas) - ferramenta interna, não faz parte do site
+# publicado. Fica fora do controle de versão deste repositório de propósito:
+# guarda credenciais (.env), banco local com dados de prospecção e uma venv
+# grande - nada disso deve ir pro histórico de um repo que o Vercel publica.
+/harvey/
