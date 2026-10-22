@@ -38,8 +38,19 @@
         "name": "Sysgate",
         "url": "https://www.sysgate.com.br/",
         "logo": "https://www.sysgate.com.br/assets/logo-sysgate.png",
-        "description": "Sysgate é um sistema de portaria e gestão de condomínios: portal web para síndicos e administradoras, aplicativo para moradores e aplicativo de serviços para zeladores e porteiros.",
-        "areaServed": "BR",
+        "description": "Sysgate é um sistema de portaria e gestão de condomínios, com sede em Campinas/SP: portal web para síndicos e administradoras, aplicativo para moradores e aplicativo de serviços para zeladores e porteiros.",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Campinas",
+          "addressRegion": "SP",
+          "addressCountry": "BR"
+        },
+        "areaServed": [
+          { "@type": "City", "name": "Campinas" },
+          { "@type": "AdministrativeArea", "name": "Região Metropolitana de Campinas" },
+          { "@type": "State", "name": "São Paulo" },
+          { "@type": "Country", "name": "Brasil" }
+        ],
         "contactPoint": {
           "@type": "ContactPoint",
           "telephone": "+55-11-98178-2129",
@@ -155,6 +166,10 @@
                 comunicação com moradores em um único sistema.
               </p>
               <div class="hero-badges">
+                <div class="hero-badge">
+                  <svg class="icon" width="14" height="14"><use href="#i-map-pin"/></svg>
+                  Atendemos Campinas e região
+                </div>
                 <div class="hero-badge">
                   <svg class="icon" width="14" height="14"><use href="#i-door"/></svg>
                   Feito para portaria física
