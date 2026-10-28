@@ -92,18 +92,18 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="assets/site.css" />
     <link rel="stylesheet" href="assets/cookie-consent.css" />
   </head>
-  <body>
+  <body class="home">
+    <script>document.documentElement.classList.add("js");</script>
     <!-- SVG ICON SPRITE -->
     <svg xmlns="http://www.w3.org/2000/svg" style="display:none">
       <symbol id="i-shield-check" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/><path d="m9 12 2 2 4-4"/></symbol>
       <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
-      <symbol id="i-check-circle" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m8.5 12 2.5 2.5 5-5"/></symbol>
       <symbol id="i-play" viewBox="0 0 24 24"><path d="M6 4.5v15l13-7.5-13-7.5Z"/></symbol>
       <symbol id="i-eye" viewBox="0 0 24 24"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></symbol>
       <symbol id="i-monitor" viewBox="0 0 24 24"><rect x="2.5" y="4" width="19" height="13" rx="2"/><path d="M8 21h8M12 17v4"/></symbol>
@@ -123,28 +123,29 @@
       <symbol id="i-menu" viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18"/></symbol>
       <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></symbol>
       <symbol id="i-map-pin" viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></symbol>
-      <symbol id="i-phone" viewBox="0 0 24 24"><path d="M5 4h4l1.5 4.5-2 2a12 12 0 0 0 5 5l2-2L20 15v4a1.5 1.5 0 0 1-1.6 1.5A17 17 0 0 1 3.5 5.6 1.5 1.5 0 0 1 5 4Z"/></symbol>
       <symbol id="i-arrow-right" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+      <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+      <symbol id="i-volume" viewBox="0 0 24 24"><path d="M11 5 6 9H3v6h3l5 4V5Z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M18.5 5.5a9 9 0 0 1 0 13"/></symbol>
+      <symbol id="i-volume-x" viewBox="0 0 24 24"><path d="M11 5 6 9H3v6h3l5 4V5Z"/><path d="m16 9 5 6M21 9l-5 6"/></symbol>
       <symbol id="i-instagram" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r="1"/></symbol>
       <symbol id="i-linkedin" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M7 10v7M7 7v.01M11.5 17v-4a2.5 2.5 0 0 1 5 0v4M11.5 10v7"/></symbol>
-      <symbol id="i-facebook" viewBox="0 0 24 24"><path d="M14 21v-7h2.5l.5-3H14V9c0-.9.3-1.5 1.7-1.5H17V4.8c-.3 0-1.3-.1-2.5-.1-2.4 0-4 1.5-4 4.2V11H8v3h2.5v7H14Z"/></symbol>
     </svg>
 
     <div class="page-wrap">
 
-      <header>
+      <header class="site-header">
         <div class="nav">
-          <div class="nav-left">
-            <img src="assets/logo-sysgate.png" alt="Sysgate" />
-          </div>
-          <nav class="nav-links">
+          <a class="nav-left" href="#topo" aria-label="Sysgate, voltar ao topo">
+            <img src="assets/logo-sysgate-light.png" alt="Sysgate" width="520" height="103" />
+          </a>
+          <nav class="nav-links" aria-label="Seções">
             <a href="#ecossistema">Ecossistema</a>
             <a href="#funcionalidades">Funcionalidades</a>
             <a href="#demos">Demonstrações</a>
             <a href="#publicos">Para quem é</a>
           </nav>
           <div class="nav-ctas">
-            <a href="https://portal.sysgate.com.br" target="_blank" rel="noopener" class="btn btn-dark btn-sm">Acessar Portal</a>
+            <a href="https://portal.sysgate.com.br" target="_blank" rel="noopener" class="btn btn-ghost btn-sm">Acessar Portal</a>
             <a
               class="btn btn-primary btn-sm"
               href="https://wa.me/5511981782129?text=Ol%C3%A1!%20Quero%20agendar%20uma%20demonstra%C3%A7%C3%A3o%20do%20Sysgate."
@@ -158,24 +159,21 @@
             </button>
           </div>
         </div>
-        <nav class="mobile-menu" id="mobileMenu">
+        <nav class="mobile-menu" id="mobileMenu" aria-label="Menu">
           <a href="#ecossistema">Ecossistema</a>
           <a href="#funcionalidades">Funcionalidades</a>
           <a href="#demos">Demonstrações</a>
           <a href="#publicos">Para quem é</a>
-          <a href="https://portal.sysgate.com.br" target="_blank" rel="noopener" class="btn btn-dark">Acessar Portal</a>
+          <a href="https://portal.sysgate.com.br" target="_blank" rel="noopener" class="btn btn-ghost">Acessar Portal</a>
         </nav>
       </header>
 
-      <!-- HERO -->
       <main>
-        <section id="topo">
-          <div class="hero">
-            <div>
-              <div class="hero-kicker">
-                <svg class="icon" width="15" height="15"><use href="#i-bolt"/></svg>
-                Sistema de controle de acesso
-              </div>
+        <!-- HERO -->
+        <section id="topo" class="hero">
+          <div class="hero-grid">
+            <div class="hero-copy">
+              <p class="hero-kicker">Sistema de controle de acesso</p>
               <h1 class="hero-title">
                 Sistema de Portaria e
                 <span>Gestão de Condomínios</span>
@@ -185,338 +183,330 @@
                 que organiza controle de acesso, visitantes, encomendas e
                 comunicação com moradores em um único sistema.
               </p>
-              <div class="hero-badges">
-                <div class="hero-badge">
-                  <svg class="icon" width="14" height="14"><use href="#i-map-pin"/></svg>
-                  Atendemos Campinas e região
-                </div>
-                <div class="hero-badge">
-                  <svg class="icon" width="14" height="14"><use href="#i-door"/></svg>
-                  Feito para portaria física
-                </div>
-                <div class="hero-badge">
-                  <svg class="icon" width="14" height="14"><use href="#i-camera"/></svg>
-                  Reconhecimento facial
-                </div>
-                <div class="hero-badge">
-                  <svg class="icon" width="14" height="14"><use href="#i-smartphone"/></svg>
-                  App para controlar visitantes
-                </div>
-              </div>
               <div class="hero-ctas">
-                <button
-                  class="btn btn-outline"
-                  onclick="document.getElementById('demos').scrollIntoView({ behavior: 'smooth' })"
+                <a
+                  class="btn btn-primary"
+                  href="https://wa.me/5511981782129?text=Ol%C3%A1!%20Quero%20agendar%20uma%20demonstra%C3%A7%C3%A3o%20do%20Sysgate."
+                  target="_blank"
+                  rel="noopener"
                 >
-                  <svg class="icon" width="15" height="15"><use href="#i-eye"/></svg>
+                  Agendar demo
+                  <svg class="icon" width="15" height="15"><use href="#i-arrow-right"/></svg>
+                </a>
+                <a class="btn btn-ghost" href="#demos">
+                  <svg class="icon" width="15" height="15"><use href="#i-play"/></svg>
                   Ver como funciona
-                </button>
-              </div>
-
-              <div class="hero-stats">
-                <div>
-                  <div class="hero-stat-value">3 em 1</div>
-                  <div class="hero-stat-label">Portal + App morador + App serviços</div>
-                </div>
-                <div>
-                  <div class="hero-stat-value">Tempo real</div>
-                  <div class="hero-stat-label">Acessos, entregas e alertas</div>
-                </div>
+                </a>
               </div>
             </div>
 
-            <div class="hero-right">
-              <div class="hero-card-tag">
-                <span class="hero-card-tag-dot"></span>
-                Painel do síndico em tempo real
-              </div>
-              <div class="browser-frame reveal" data-delay="0">
-                <div class="browser-frame-img-wrap">
-                  <img src="assets/dashboard_sindico.png" alt="Dashboard do síndico Sysgate" loading="eager" />
-                </div>
-              </div>
-              <div class="phone-frame reveal" data-delay="200">
-                <div class="phone-frame-img-wrap">
-                  <img src="assets/app-morador-home.jpeg" alt="App Sysgate Morador" loading="eager" />
-                </div>
+            <div class="hero-visual">
+              <figure class="window hero-window">
+                <div class="window-bar"><span class="window-url">portal.sysgate.com.br</span></div>
+                <img src="assets/screen-dashboard.jpg" width="1265" height="937" alt="Dashboard do síndico Sysgate" fetchpriority="high" />
+              </figure>
+              <div class="phone hero-phone">
+                <img src="assets/app-morador-home.jpeg" width="1179" height="2556" alt="App Sysgate Morador" />
               </div>
             </div>
           </div>
         </section>
 
-        <!-- LOGO STRIP -->
-        <div class="logo-strip">
-          <div class="logo-strip-inner">
-            <span class="logo-strip-label">Integrado com os principais fabricantes</span>
-            <div class="logo-strip-items">
-              <span><svg class="icon" width="16" height="16"><use href="#i-camera"/></svg> ControlID</span>
-              <span><svg class="icon" width="16" height="16"><use href="#i-camera"/></svg> Hikvision</span>
-              <span><svg class="icon" width="16" height="16"><use href="#i-camera"/></svg> Intelbras</span>
-              <span><svg class="icon" width="16" height="16"><use href="#i-shield-check"/></svg> Reconhecimento facial</span>
-            </div>
-          </div>
-        </div>
+        <!-- DESTAQUES -->
+        <section class="proof" aria-label="Destaques do Sysgate">
+          <ul class="proof-grid">
+            <li class="proof-item">
+              <svg class="icon" width="18" height="18"><use href="#i-layers"/></svg>
+              <div><strong>3 em 1</strong><span>Portal + App morador + App serviços</span></div>
+            </li>
+            <li class="proof-item">
+              <svg class="icon" width="18" height="18"><use href="#i-bolt"/></svg>
+              <div><strong>Tempo real</strong><span>Acessos, entregas e alertas</span></div>
+            </li>
+            <li class="proof-item">
+              <svg class="icon" width="18" height="18"><use href="#i-camera"/></svg>
+              <div><strong>Reconhecimento facial</strong><span>Integrado com ControlID, Hikvision e Intelbras</span></div>
+            </li>
+            <li class="proof-item">
+              <svg class="icon" width="18" height="18"><use href="#i-map-pin"/></svg>
+              <div><strong>Atendemos Campinas e região</strong><span>Feito para portaria física</span></div>
+            </li>
+          </ul>
+        </section>
 
         <!-- ECOSSISTEMA -->
-        <section id="ecossistema">
-          <div class="section-wrap">
-            <div class="section-header reveal" data-delay="0">
-              <div>
-                <div class="eyebrow">Ecossistema Sysgate</div>
-                <h2 class="section-title">Sistema de portaria e ecossistema completo em três frentes.</h2>
-              </div>
-              <p class="section-subtitle">
+        <section id="ecossistema" class="section">
+          <div class="container">
+            <header class="section-head reveal">
+              <h2 class="section-title">Sistema de portaria e ecossistema completo em três frentes.</h2>
+              <p class="section-sub">
                 Portal web, app do morador e app de serviços conversam entre si
-                em tempo real — cada perfil vê exatamente o que precisa, sem
+                em tempo real. Cada perfil vê exatamente o que precisa, sem
                 depender de planilha, grupo de WhatsApp ou rádio.
               </p>
-            </div>
+            </header>
 
-            <!-- SISTEMA PARA PORTARIA / PORTAL DO SÍNDICO -->
-            <div class="app-section">
-              <div class="app-visual reveal" data-delay="0">
-                <div class="monitor-mockup">
-                  <div class="monitor-shell">
-                    <div class="monitor-screen">
-                      <img src="assets/dashboard_sindico.png" alt="Sistema de portaria Sysgate rodando no computador da portaria" loading="lazy" />
-                    </div>
-                  </div>
-                  <div class="monitor-neck"></div>
-                  <div class="monitor-base"></div>
-                  <div class="monitor-desk"></div>
+            <div class="eco-grid">
+              <!-- SISTEMA PARA PORTARIA / PORTAL DO SÍNDICO -->
+              <article class="eco-card eco-portal reveal">
+                <div class="eco-copy">
+                  <p class="eco-label"><svg class="icon" width="14" height="14"><use href="#i-monitor"/></svg>Portal Web · Sistema para portaria</p>
+                  <h3 class="eco-title">Portal do Síndico &amp; Administradora</h3>
+                  <p class="eco-text">
+                    O sistema que fica no computador da portaria e no painel do
+                    síndico, com integração direta com dispositivos de acesso.
+                    Conheça nosso <a href="sistema-de-portaria.html">sistema de portaria para condomínios</a>.
+                  </p>
+                  <details class="eco-more">
+                    <summary>Ver recursos <svg class="icon" width="14" height="14"><use href="#i-plus"/></svg></summary>
+                    <ul class="check-list">
+                      <li><svg class="icon" width="14" height="14"><use href="#i-check"/></svg>Moradores, veículos e visitantes centralizados</li>
+                      <li><svg class="icon" width="14" height="14"><use href="#i-check"/></svg>Encomendas com foto e confirmação de retirada</li>
+                      <li><svg class="icon" width="14" height="14"><use href="#i-check"/></svg>Reserva e gestão de áreas comuns</li>
+                      <li><svg class="icon" width="14" height="14"><use href="#i-check"/></svg>Integração com ControlID, Hikvision e Intelbras</li>
+                      <li><svg class="icon" width="14" height="14"><use href="#i-check"/></svg>Multi-condomínio para administradoras</li>
+                      <li><svg class="icon" width="14" height="14"><use href="#i-check"/></svg>Comunicados, banners e histórico completo</li>
+                    </ul>
+                    <a
+                      class="link-arrow"
+                      href="https://wa.me/5511981782129?text=Ol%C3%A1!%20Quero%20conhecer%20o%20portal%20do%20s%C3%ADndico%20da%20Sysgate."
+                      target="_blank"
+                      rel="noopener"
+                    >Conhecer o portal <svg class="icon" width="14" height="14"><use href="#i-arrow-right"/></svg></a>
+                  </details>
                 </div>
-              </div>
-              <div class="app-copy reveal" data-delay="150">
-                <div class="pillar-kicker">Portal Web · Sistema para portaria</div>
-                <h3 class="app-title">Portal do Síndico &amp; Administradora</h3>
-                <p class="app-text">
-                  O sistema que fica no computador da portaria e no painel do
-                  síndico. Cadastro de moradores e veículos, controle de
-                  visitantes, encomendas, áreas comuns e integração direta com
-                  dispositivos de acesso — tudo em uma tela só. Conheça nosso
-                  <a href="sistema-de-portaria.html">sistema de portaria para condomínios</a>.
-                </p>
-                <ul class="pillar-list">
-                  <li><svg class="icon" width="15" height="15"><use href="#i-check"/></svg>Moradores, veículos e visitantes centralizados</li>
-                  <li><svg class="icon" width="15" height="15"><use href="#i-check"/></svg>Encomendas com foto e confirmação de retirada</li>
-                  <li><svg class="icon" width="15" height="15"><use href="#i-check"/></svg>Reserva e gestão de áreas comuns</li>
-                  <li><svg class="icon" width="15" height="15"><use href="#i-check"/></svg>Integração com ControlID, Hikvision e Intelbras</li>
-                  <li><svg class="icon" width="15" height="15"><use href="#i-check"/></svg>Multi-condomínio para administradoras</li>
-                  <li><svg class="icon" width="15" height="15"><use href="#i-check"/></svg>Comunicados, banners e histórico completo</li>
-                </ul>
-                <a
-                  class="btn btn-outline"
-                  href="https://wa.me/5511981782129?text=Ol%C3%A1!%20Quero%20conhecer%20o%20portal%20do%20s%C3%ADndico%20da%20Sysgate."
-                  target="_blank"
-                  rel="noopener"
-                >
-                  <svg class="icon" width="15" height="15"><use href="#i-monitor"/></svg>
-                  Conhecer o portal
-                </a>
-              </div>
-            </div>
+                <div class="eco-visual eco-visual-wide">
+                  <img src="assets/screen-moradores.jpg" width="1600" height="1085" alt="Sistema de portaria Sysgate rodando no computador da portaria" loading="lazy" />
+                </div>
+              </article>
 
-            <!-- APP DO MORADOR -->
-            <div class="app-section">
-              <div class="app-copy reveal" data-delay="0">
-                <div class="pillar-kicker">App do Morador</div>
-                <h3 class="app-title">Sysgate Morador</h3>
-                <p class="app-text">
-                  O condomínio na palma da mão. O morador pré-cadastra visitas,
-                  acompanha encomendas com notificação push e resolve o dia a
-                  dia sem depender de interfone.
-                </p>
-                <ul class="pillar-list">
-                  <li><svg class="icon" width="15" height="15"><use href="#i-check"/></svg>Encomendas pendentes e entregues com push</li>
-                  <li><svg class="icon" width="15" height="15"><use href="#i-check"/></svg>Pré-cadastro e liberação de visitantes</li>
-                  <li><svg class="icon" width="15" height="15"><use href="#i-check"/></svg>Reserva de áreas comuns pelo app</li>
-                  <li><svg class="icon" width="15" height="15"><use href="#i-check"/></svg>Cadastro de veículos</li>
-                  <li><svg class="icon" width="15" height="15"><use href="#i-check"/></svg>Marketplace de produtos e serviços do condomínio</li>
-                  <li><svg class="icon" width="15" height="15"><use href="#i-check"/></svg>Assistente com IA para dúvidas rápidas</li>
-                </ul>
-                <a
-                  class="btn btn-outline"
-                  href="https://wa.me/5511981782129?text=Ol%C3%A1!%20Quero%20conhecer%20o%20app%20do%20morador%20da%20Sysgate."
-                  target="_blank"
-                  rel="noopener"
-                >
-                  <svg class="icon" width="15" height="15"><use href="#i-smartphone"/></svg>
-                  Conhecer o app do morador
-                </a>
-              </div>
-              <div class="app-visual reveal" data-delay="150">
-                <div class="phone-mockup-standalone">
-                  <div class="phone-mockup-standalone-screen">
-                    <img src="assets/app-morador-home.jpeg" alt="App Sysgate Morador - tela inicial" loading="lazy" />
-                  </div>
+              <!-- APP DO MORADOR -->
+              <article class="eco-card eco-morador reveal">
+                <div class="eco-copy">
+                  <p class="eco-label"><svg class="icon" width="14" height="14"><use href="#i-smartphone"/></svg>App do Morador</p>
+                  <h3 class="eco-title">Sysgate Morador</h3>
+                  <p class="eco-text">
+                    O condomínio na palma da mão. O morador pré-cadastra visitas,
+                    acompanha encomendas com notificação push e resolve o dia a
+                    dia sem depender de interfone.
+                  </p>
                 </div>
-              </div>
-            </div>
+                <div class="app-video">
+                  <video
+                    id="appVideo"
+                    width="960"
+                    height="960"
+                    muted
+                    loop
+                    playsinline
+                    preload="none"
+                    poster="assets/sysgate-app-morador.jpg"
+                    controlslist="nodownload noplaybackrate"
+                    disablepictureinpicture
+                    aria-label="Vídeo do app Sysgate Morador: cadastro de visitantes, cadastro de veículos e mensagens para a portaria"
+                  >
+                    <source src="assets/sysgate-app-morador.mp4" type="video/mp4" />
+                  </video>
+                  <button class="app-video-sound" id="appVideoSound" type="button" aria-pressed="false">
+                    <svg class="icon" width="15" height="15" id="appVideoSoundIcon"><use href="#i-volume-x"/></svg>
+                    <span id="appVideoSoundLabel">Ativar som</span>
+                  </button>
+                </div>
+                <details class="eco-more">
+                  <summary>Ver recursos <svg class="icon" width="14" height="14"><use href="#i-plus"/></svg></summary>
+                  <ul class="check-list">
+                    <li><svg class="icon" width="14" height="14"><use href="#i-check"/></svg>Encomendas pendentes e entregues com push</li>
+                    <li><svg class="icon" width="14" height="14"><use href="#i-check"/></svg>Pré-cadastro e liberação de visitantes</li>
+                    <li><svg class="icon" width="14" height="14"><use href="#i-check"/></svg>Reserva de áreas comuns pelo app</li>
+                    <li><svg class="icon" width="14" height="14"><use href="#i-check"/></svg>Cadastro de veículos</li>
+                    <li><svg class="icon" width="14" height="14"><use href="#i-check"/></svg>Marketplace de produtos e serviços do condomínio</li>
+                    <li><svg class="icon" width="14" height="14"><use href="#i-check"/></svg>Assistente com IA para dúvidas rápidas</li>
+                  </ul>
+                  <a
+                    class="link-arrow"
+                    href="https://wa.me/5511981782129?text=Ol%C3%A1!%20Quero%20conhecer%20o%20app%20do%20morador%20da%20Sysgate."
+                    target="_blank"
+                    rel="noopener"
+                  >Conhecer o app do morador <svg class="icon" width="14" height="14"><use href="#i-arrow-right"/></svg></a>
+                </details>
+              </article>
 
-            <!-- APP DE SERVIÇOS -->
-            <div class="app-section">
-              <div class="app-visual reveal" data-delay="0">
-                <div class="app-visual-servicos">
-                  <div class="phone-mockup-standalone">
-                    <div class="phone-mockup-standalone-screen">
-                      <img src="assets/app-serviços-tickets.jpeg" alt="App Sysgate Serviços - fila de chamados" loading="lazy" />
-                    </div>
+              <!-- APP DE SERVIÇOS -->
+              <article class="eco-card eco-servicos reveal">
+                <div class="eco-copy">
+                  <p class="eco-label"><svg class="icon" width="14" height="14"><use href="#i-wrench"/></svg>App de Serviços</p>
+                  <h3 class="eco-title">Sysgate Serviços</h3>
+                  <p class="eco-text">
+                    Chamados de manutenção organizados entre porteiro, zelador e
+                    síndico. Cada chamado com dono, status e prazo, do abrir ao
+                    resolver.
+                  </p>
+                  <details class="eco-more">
+                    <summary>Ver recursos <svg class="icon" width="14" height="14"><use href="#i-plus"/></svg></summary>
+                    <ul class="check-list">
+                      <li><svg class="icon" width="14" height="14"><use href="#i-check"/></svg>Abertura de chamados pela portaria</li>
+                      <li><svg class="icon" width="14" height="14"><use href="#i-check"/></svg>Fila de tarefas dedicada ao zelador</li>
+                      <li><svg class="icon" width="14" height="14"><use href="#i-check"/></svg>Dashboard de acompanhamento para o síndico</li>
+                      <li><svg class="icon" width="14" height="14"><use href="#i-check"/></svg>Avisos e comunicados internos</li>
+                      <li><svg class="icon" width="14" height="14"><use href="#i-check"/></svg>Histórico de chamados por condomínio</li>
+                      <li><svg class="icon" width="14" height="14"><use href="#i-check"/></svg>Perfis de acesso por função (porteiro/zelador/síndico)</li>
+                    </ul>
+                    <a
+                      class="link-arrow"
+                      href="https://wa.me/5511981782129?text=Ol%C3%A1!%20Quero%20conhecer%20o%20app%20de%20servi%C3%A7os%20da%20Sysgate."
+                      target="_blank"
+                      rel="noopener"
+                    >Conhecer o app de serviços <svg class="icon" width="14" height="14"><use href="#i-arrow-right"/></svg></a>
+                  </details>
+                </div>
+                <div class="eco-visual eco-visual-phone">
+                  <div class="phone">
+                    <img src="assets/app-serviços-tickets.jpeg" width="590" height="1280" alt="App Sysgate Serviços - fila de chamados" loading="lazy" />
                   </div>
                 </div>
-              </div>
-              <div class="app-copy reveal" data-delay="150">
-                <div class="pillar-kicker">App de Serviços</div>
-                <h3 class="app-title">Sysgate Serviços</h3>
-                <p class="app-text">
-                  Chamados de manutenção organizados entre porteiro, zelador e
-                  síndico — cada chamado com dono, status e prazo, do abrir ao
-                  resolver.
-                </p>
-                <ul class="pillar-list">
-                  <li><svg class="icon" width="15" height="15"><use href="#i-check"/></svg>Abertura de chamados pela portaria</li>
-                  <li><svg class="icon" width="15" height="15"><use href="#i-check"/></svg>Fila de tarefas dedicada ao zelador</li>
-                  <li><svg class="icon" width="15" height="15"><use href="#i-check"/></svg>Dashboard de acompanhamento para o síndico</li>
-                  <li><svg class="icon" width="15" height="15"><use href="#i-check"/></svg>Avisos e comunicados internos</li>
-                  <li><svg class="icon" width="15" height="15"><use href="#i-check"/></svg>Histórico de chamados por condomínio</li>
-                  <li><svg class="icon" width="15" height="15"><use href="#i-check"/></svg>Perfis de acesso por função (porteiro/zelador/síndico)</li>
-                </ul>
-                <a
-                  class="btn btn-outline"
-                  href="https://wa.me/5511981782129?text=Ol%C3%A1!%20Quero%20conhecer%20o%20app%20de%20servi%C3%A7os%20da%20Sysgate."
-                  target="_blank"
-                  rel="noopener"
-                >
-                  <svg class="icon" width="15" height="15"><use href="#i-wrench"/></svg>
-                  Conhecer o app de serviços
-                </a>
-              </div>
+              </article>
             </div>
           </div>
         </section>
 
         <!-- FUNCIONALIDADES -->
-        <section id="funcionalidades">
-          <div class="section-wrap">
-            <div class="section-header reveal" data-delay="0">
-              <div>
-                <div class="eyebrow">Funcionalidades</div>
-                <h2 class="section-title">
-                  Tudo o que o condomínio precisa em um painel só.
-                </h2>
-              </div>
-              <p class="section-subtitle">
+        <section id="funcionalidades" class="section">
+          <div class="container">
+            <header class="section-head reveal">
+              <h2 class="section-title">Tudo o que o condomínio precisa em um painel só.</h2>
+              <p class="section-sub">
                 Sysgate centraliza cadastro de moradores, controle de acesso,
                 registro de visitantes, encomendas com foto, notificações e
                 relatórios para assembleia. Pensado para síndicos e
                 administradoras.
               </p>
-            </div>
+            </header>
 
-            <div class="features-grid">
-              <article class="feature-card reveal" data-delay="0">
-                <div class="feature-icon"><svg class="icon" width="20" height="20"><use href="#i-door"/></svg></div>
-                <h3 class="feature-title">Controle de acesso com reconhecimento facial</h3>
-                <p class="feature-text">
-                  Cadastre moradores, veículos e visitantes e integre direto
-                  com catracas e câmeras ControlID, Hikvision e Intelbras.
-                  Acesso liberado automaticamente, com histórico centralizado.
-                </p>
-                <div class="feature-tagline">
-                  <svg class="icon" width="13" height="13"><use href="#i-arrow-right"/></svg>
-                  Ideal para condomínios com portaria física.
-                </div>
-              </article>
+            <div class="features">
+              <div class="feature-list reveal" id="featureList">
+                <details class="feature" name="funcionalidade" data-shot="0" open>
+                  <summary>
+                    <span class="feature-icon"><svg class="icon" width="18" height="18"><use href="#i-door"/></svg></span>
+                    <h3 class="feature-title">Controle de acesso com reconhecimento facial</h3>
+                    <svg class="icon feature-toggle" width="16" height="16"><use href="#i-plus"/></svg>
+                  </summary>
+                  <div class="feature-body">
+                    <p>
+                      Cadastre moradores, veículos e visitantes e integre direto
+                      com catracas e câmeras ControlID, Hikvision e Intelbras.
+                      Acesso liberado automaticamente, com histórico centralizado.
+                    </p>
+                    <p class="feature-tagline">Ideal para condomínios com portaria física.</p>
+                  </div>
+                </details>
 
-              <article class="feature-card reveal" data-delay="100">
-                <div class="feature-icon"><svg class="icon" width="20" height="20"><use href="#i-package"/></svg></div>
-                <h3 class="feature-title">Encomendas com foto e confirmação</h3>
-                <p class="feature-text">
-                  Registre entregas com foto, horário e responsável. O morador
-                  recebe notificação push no app e confirma a retirada,
-                  evitando o famoso “sumiu na portaria”.
-                </p>
-                <div class="feature-tagline">
-                  <svg class="icon" width="13" height="13"><use href="#i-arrow-right"/></svg>
-                  Histórico completo para qualquer conferência.
-                </div>
-              </article>
+                <details class="feature" name="funcionalidade" data-shot="1">
+                  <summary>
+                    <span class="feature-icon"><svg class="icon" width="18" height="18"><use href="#i-package"/></svg></span>
+                    <h3 class="feature-title">Encomendas com foto e confirmação</h3>
+                    <svg class="icon feature-toggle" width="16" height="16"><use href="#i-plus"/></svg>
+                  </summary>
+                  <div class="feature-body">
+                    <p>
+                      Registre entregas com foto, horário e responsável. O morador
+                      recebe notificação push no app e confirma a retirada,
+                      evitando o famoso “sumiu na portaria”.
+                    </p>
+                    <p class="feature-tagline">Histórico completo para qualquer conferência.</p>
+                  </div>
+                </details>
 
-              <article class="feature-card reveal" data-delay="200">
-                <div class="feature-icon"><svg class="icon" width="20" height="20"><use href="#i-ticket"/></svg></div>
-                <h3 class="feature-title">Chamados e manutenção sem enrolação</h3>
-                <p class="feature-text">
-                  Porteiro abre o chamado, zelador executa, síndico acompanha
-                  o status em tempo real. Cada ocorrência tem dono, prazo e
-                  histórico — sem se perder em grupo de WhatsApp.
-                </p>
-                <div class="feature-tagline">
-                  <svg class="icon" width="13" height="13"><use href="#i-arrow-right"/></svg>
-                  Um fluxo, três perfis, zero retrabalho.
-                </div>
-              </article>
+                <details class="feature" name="funcionalidade" data-shot="2">
+                  <summary>
+                    <span class="feature-icon"><svg class="icon" width="18" height="18"><use href="#i-ticket"/></svg></span>
+                    <h3 class="feature-title">Chamados e manutenção sem enrolação</h3>
+                    <svg class="icon feature-toggle" width="16" height="16"><use href="#i-plus"/></svg>
+                  </summary>
+                  <div class="feature-body">
+                    <p>
+                      Porteiro abre o chamado, zelador executa, síndico acompanha
+                      o status em tempo real. Cada ocorrência tem dono, prazo e
+                      histórico, sem se perder em grupo de WhatsApp.
+                    </p>
+                    <p class="feature-tagline">Um fluxo, três perfis, zero retrabalho.</p>
+                  </div>
+                </details>
 
-              <article class="feature-card reveal" data-delay="300">
-                <div class="feature-icon"><svg class="icon" width="20" height="20"><use href="#i-bar-chart"/></svg></div>
-                <h3 class="feature-title">Relatórios para assembleia</h3>
-                <p class="feature-text">
-                  Gere relatórios de acessos, visitas e entregas em poucos
-                  cliques. Use dados reais na prestação de contas e em decisões
-                  de segurança.
-                </p>
-                <div class="feature-tagline">
-                  <svg class="icon" width="13" height="13"><use href="#i-arrow-right"/></svg>
-                  Transparência total para conselho e moradores.
-                </div>
-              </article>
+                <details class="feature" name="funcionalidade" data-shot="3">
+                  <summary>
+                    <span class="feature-icon"><svg class="icon" width="18" height="18"><use href="#i-bar-chart"/></svg></span>
+                    <h3 class="feature-title">Relatórios para assembleia</h3>
+                    <svg class="icon feature-toggle" width="16" height="16"><use href="#i-plus"/></svg>
+                  </summary>
+                  <div class="feature-body">
+                    <p>
+                      Gere relatórios de acessos, visitas e entregas em poucos
+                      cliques. Use dados reais na prestação de contas e em decisões
+                      de segurança.
+                    </p>
+                    <p class="feature-tagline">Transparência total para conselho e moradores.</p>
+                  </div>
+                </details>
 
-              <article class="feature-card reveal" data-delay="400">
-                <div class="feature-icon"><svg class="icon" width="20" height="20"><use href="#i-tie"/></svg></div>
-                <h3 class="feature-title">Visão especial para síndico</h3>
-                <p class="feature-text">
-                  Painel pensado para o dia a dia do síndico: visão geral de
-                  tudo que acontece, alertas, pendências, e troca rápida entre
-                  múltiplos condomínios administrados.
-                </p>
-                <div class="feature-tagline">
-                  <svg class="icon" width="13" height="13"><use href="#i-arrow-right"/></svg>
-                  Um Painel de controle para cada condomínio.
-                </div>
-              </article>
+                <details class="feature" name="funcionalidade" data-shot="3">
+                  <summary>
+                    <span class="feature-icon"><svg class="icon" width="18" height="18"><use href="#i-tie"/></svg></span>
+                    <h3 class="feature-title">Visão especial para síndico</h3>
+                    <svg class="icon feature-toggle" width="16" height="16"><use href="#i-plus"/></svg>
+                  </summary>
+                  <div class="feature-body">
+                    <p>
+                      Painel pensado para o dia a dia do síndico: visão geral de
+                      tudo que acontece, alertas, pendências, e troca rápida entre
+                      múltiplos condomínios administrados.
+                    </p>
+                    <p class="feature-tagline">Um Painel de controle para cada condomínio.</p>
+                  </div>
+                </details>
 
-              <article class="feature-card reveal" data-delay="500">
-                <div class="feature-icon"><svg class="icon" width="20" height="20"><use href="#i-handshake"/></svg></div>
-                <h3 class="feature-title">Administradoras no controle</h3>
-                <p class="feature-text">
-                  Centralize vários condomínios em uma só plataforma,
-                  padronizando processos e reduzindo trabalho manual da sua
-                  equipe.
-                </p>
-                <div class="feature-tagline">
-                  <svg class="icon" width="13" height="13"><use href="#i-arrow-right"/></svg>
-                  Escale sua carteira sem perder controle.
+                <details class="feature" name="funcionalidade" data-shot="4">
+                  <summary>
+                    <span class="feature-icon"><svg class="icon" width="18" height="18"><use href="#i-handshake"/></svg></span>
+                    <h3 class="feature-title">Administradoras no controle</h3>
+                    <svg class="icon feature-toggle" width="16" height="16"><use href="#i-plus"/></svg>
+                  </summary>
+                  <div class="feature-body">
+                    <p>
+                      Centralize vários condomínios em uma só plataforma,
+                      padronizando processos e reduzindo trabalho manual da sua
+                      equipe.
+                    </p>
+                    <p class="feature-tagline">Escale sua carteira sem perder controle.</p>
+                  </div>
+                </details>
+              </div>
+
+              <figure class="window feature-visual reveal">
+                <div class="window-bar"><span class="window-url">portal.sysgate.com.br</span></div>
+                <div class="feature-shots" id="featureShots">
+                  <img class="is-active" src="assets/screen-visitantes.jpg" width="1600" height="1090" alt="Tela de visitantes dentro do condomínio no Sysgate" loading="lazy" />
+                  <img src="assets/screen-encomendas.jpg" width="1600" height="1097" alt="Tela de encomendas na portaria do Sysgate" loading="lazy" />
+                  <img class="shot-phone" src="assets/app-serviços-tickets.jpeg" width="590" height="1280" alt="Fila de chamados no app Sysgate Serviços" loading="lazy" />
+                  <img src="assets/screen-dashboard.jpg" width="1265" height="937" alt="Painel do síndico com visitantes, encomendas e alertas" loading="lazy" />
+                  <img src="assets/screen-moradores.jpg" width="1600" height="1085" alt="Cadastro de moradores e veículos no Sysgate" loading="lazy" />
                 </div>
-              </article>
+              </figure>
             </div>
           </div>
         </section>
 
         <!-- DEMONSTRAÇÕES -->
-        <section id="demos">
-          <div class="section-wrap">
-            <div class="section-header reveal" data-delay="0">
-              <div>
-                <div class="eyebrow">Demonstrações</div>
-                <h2 class="section-title">
-                  As telas você confere ao vivo, com a gente.
-                </h2>
-              </div>
-              <p class="section-subtitle">
+        <section id="demos" class="section">
+          <div class="container">
+            <header class="section-head section-head-center reveal">
+              <h2 class="section-title">As telas você confere ao vivo, com a gente.</h2>
+              <p class="section-sub">
                 Marque um horário e navegamos juntos
                 pelo painel do síndico, o app do morador e o app de serviços.
               </p>
-            </div>
+            </header>
 
-            <figure class="demo-video reveal" data-delay="0">
+            <figure class="demo-video reveal">
               <video
                 id="demoVideo"
                 class="demo-video-player"
@@ -540,19 +530,27 @@
               </figcaption>
             </figure>
 
-            <div class="demo-panel reveal" data-delay="0">
-              <div class="demo-panel-icon">
-                <svg class="icon" width="26" height="26"><use href="#i-play"/></svg>
+            <div class="demo-panel reveal">
+              <div class="demo-intro">
+                <h3 class="demo-copy-title">
+                  Painel de Controle para o síndico, app para o morador, fila de tarefas
+                  para a equipe.
+                </h3>
+                <p class="demo-copy-text">
+                  Em 20 minutos de chamada mostramos exatamente como cada perfil
+                  usa o Sysgate no dia a dia, sem roteiro engessado e focado nas
+                  dores do seu condomínio.
+                </p>
+                <a
+                  class="btn btn-primary"
+                  href="https://wa.me/5511981782129?text=Ol%C3%A1!%20Quero%20ver%20a%20plataforma%20Sysgate%20ao%20vivo."
+                  target="_blank"
+                  rel="noopener"
+                >
+                  <svg class="icon" width="15" height="15"><use href="#i-play"/></svg>
+                  Quero ver a plataforma ao vivo
+                </a>
               </div>
-              <h3 class="demo-copy-title">
-                Painel de Controle para o síndico, app para o morador, fila de tarefas
-                para a equipe.
-              </h3>
-              <p class="demo-copy-text">
-                Em 20 minutos de chamada mostramos exatamente como cada perfil
-                usa o Sysgate no dia a dia — sem roteiro engessado, focado nas
-                dores do seu condomínio.
-              </p>
               <div class="demo-highlights">
                 <div class="demo-highlight">
                   <div class="demo-highlight-icon"><svg class="icon" width="16" height="16"><use href="#i-smartphone"/></svg></div>
@@ -567,112 +565,134 @@
                   <div>Administradora consegue gerenciar vários condomínios com a mesma experiência padronizada.</div>
                 </div>
               </div>
-              <div class="demo-panel-cta">
-                <a
-                  class="btn btn-primary"
-                  href="https://wa.me/5511981782129?text=Ol%C3%A1!%20Quero%20ver%20a%20plataforma%20Sysgate%20ao%20vivo."
-                  target="_blank"
-                  rel="noopener"
-                >
-                  <svg class="icon" width="15" height="15"><use href="#i-play"/></svg>
-                  Quero ver a plataforma ao vivo
-                </a>
-              </div>
             </div>
           </div>
         </section>
 
         <!-- PARA QUEM É -->
-        <section id="publicos">
-          <div class="section-wrap">
-            <div class="section-header reveal" data-delay="0">
-              <div>
-                <div class="eyebrow">Para quem é</div>
-                <h2 class="section-title">
-                  Feito sob medida para quem vive o condomínio no dia a dia.
-                </h2>
-              </div>
-              <p class="section-subtitle">
+        <section id="publicos" class="section">
+          <div class="container">
+            <header class="section-head reveal">
+              <h2 class="section-title">Feito sob medida para quem vive o condomínio no dia a dia.</h2>
+              <p class="section-sub">
                 Não é só “um sistema de portaria”. É uma solução focada em
                 cortar reclamação, organizar a rotina e dar dados reais para
                 decisões de segurança e gestão.
               </p>
+            </header>
+
+            <div class="audience reveal">
+              <div class="tabs" role="tablist" aria-label="Perfis atendidos">
+                <span class="tabs-indicator" aria-hidden="true"></span>
+                <button class="tab" role="tab" id="tab-sindicos" aria-controls="panel-sindicos" aria-selected="true">
+                  <svg class="icon" width="15" height="15"><use href="#i-tie"/></svg>Síndicos
+                </button>
+                <button class="tab" role="tab" id="tab-administradoras" aria-controls="panel-administradoras" aria-selected="false" tabindex="-1">
+                  <svg class="icon" width="15" height="15"><use href="#i-handshake"/></svg>Administradoras
+                </button>
+                <button class="tab" role="tab" id="tab-equipe" aria-controls="panel-equipe" aria-selected="false" tabindex="-1">
+                  <svg class="icon" width="15" height="15"><use href="#i-wrench"/></svg>Zeladores e porteiros
+                </button>
+              </div>
+
+              <article class="audience-panel" id="panel-sindicos" role="tabpanel" aria-labelledby="tab-sindicos">
+                <div class="audience-copy">
+                  <h3>Para síndicos</h3>
+                  <p>
+                    Ideal para quem vive a rotina do condomínio e precisa resolver
+                    problemas de acesso, visitantes e encomendas com rapidez e
+                    clareza.
+                  </p>
+                  <a
+                    class="btn btn-ghost"
+                    href="https://wa.me/5511981782129?text=Ol%C3%A1!%20Sou%20s%C3%ADndico(a)%20e%20quero%20ver%20o%20Sysgate%20na%20pr%C3%A1tica."
+                    target="_blank"
+                    rel="noopener"
+                  >
+                    Sou síndico, quero ver na prática
+                  </a>
+                </div>
+                <ul class="check-list check-list-lg">
+                  <li><svg class="icon" width="15" height="15"><use href="#i-check"/></svg>Visão geral do dia em segundos: acessos, entregas, alertas.</li>
+                  <li><svg class="icon" width="15" height="15"><use href="#i-check"/></svg>Relatórios prontos para conselho e assembleia.</li>
+                  <li><svg class="icon" width="15" height="15"><use href="#i-check"/></svg>Menos interfone tocando e menos gente “batendo na porta” do síndico.</li>
+                  <li><svg class="icon" width="15" height="15"><use href="#i-check"/></svg>Feito para condomínios com portaria física.</li>
+                </ul>
+              </article>
+
+              <article class="audience-panel" id="panel-administradoras" role="tabpanel" aria-labelledby="tab-administradoras">
+                <div class="audience-copy">
+                  <h3>Para administradoras</h3>
+                  <p>
+                    Pensado para quem gerencia uma carteira inteira de condomínios
+                    e precisa padronizar processos e relatórios, sem aumentar a
+                    equipe.
+                  </p>
+                  <a
+                    class="btn btn-ghost"
+                    href="https://wa.me/5511981782129?text=Ol%C3%A1!%20Sou%20administradora%20e%20quero%20uma%20demo%20do%20Sysgate."
+                    target="_blank"
+                    rel="noopener"
+                  >
+                    Sou administradora, quero uma demo
+                  </a>
+                </div>
+                <ul class="check-list check-list-lg">
+                  <li><svg class="icon" width="15" height="15"><use href="#i-check"/></svg>Centralize vários condomínios em um só painel.</li>
+                  <li><svg class="icon" width="15" height="15"><use href="#i-check"/></svg>Padronize fluxo de visitantes, entregas e comunicação.</li>
+                  <li><svg class="icon" width="15" height="15"><use href="#i-check"/></svg>Reduza chamados operacionais com um app simples para moradores.</li>
+                  <li><svg class="icon" width="15" height="15"><use href="#i-check"/></svg>Integre facilmente novos condomínios à plataforma.</li>
+                </ul>
+              </article>
+
+              <article class="audience-panel" id="panel-equipe" role="tabpanel" aria-labelledby="tab-equipe">
+                <div class="audience-copy">
+                  <h3>Para zeladores e porteiros</h3>
+                  <p>
+                    A operação do dia a dia também merece uma ferramenta boa.
+                    Sem planilha, sem rádio, sem “esqueci de anotar”.
+                  </p>
+                  <a
+                    class="btn btn-ghost"
+                    href="https://wa.me/5511981782129?text=Ol%C3%A1!%20Trabalho%20na%20portaria%20e%20quero%20conhecer%20o%20Sysgate."
+                    target="_blank"
+                    rel="noopener"
+                  >
+                    Trabalho na portaria, quero conhecer
+                  </a>
+                </div>
+                <ul class="check-list check-list-lg">
+                  <li><svg class="icon" width="15" height="15"><use href="#i-check"/></svg>Fila de chamados clara, com prioridade e prazo.</li>
+                  <li><svg class="icon" width="15" height="15"><use href="#i-check"/></svg>Abertura de ocorrência direto da portaria.</li>
+                  <li><svg class="icon" width="15" height="15"><use href="#i-check"/></svg>Acesso apenas ao que é da sua função.</li>
+                  <li><svg class="icon" width="15" height="15"><use href="#i-check"/></svg>Histórico de tudo que já foi resolvido.</li>
+                </ul>
+              </article>
             </div>
+          </div>
+        </section>
 
-            <div class="two-cols">
-              <article class="card-vertical reveal" data-delay="0">
-                <div class="card-vertical-icon"><svg class="icon" width="20" height="20"><use href="#i-tie"/></svg></div>
-                <h3>Para síndicos</h3>
-                <p>
-                  Ideal para quem vive a rotina do condomínio e precisa resolver
-                  problemas de acesso, visitantes e encomendas com rapidez e
-                  clareza.
-                </p>
-                <ul>
-                  <li><svg class="icon" width="14" height="14"><use href="#i-check"/></svg>Visão geral do dia em segundos: acessos, entregas, alertas.</li>
-                  <li><svg class="icon" width="14" height="14"><use href="#i-check"/></svg>Relatórios prontos para conselho e assembleia.</li>
-                  <li><svg class="icon" width="14" height="14"><use href="#i-check"/></svg>Menos interfone tocando e menos gente “batendo na porta” do síndico.</li>
-                  <li><svg class="icon" width="14" height="14"><use href="#i-check"/></svg>Feito para condomínios com portaria física.</li>
-                </ul>
+        <!-- CTA FINAL -->
+        <section class="cta-final" aria-labelledby="ctaFinalTitle">
+          <div class="container">
+            <div class="cta-box reveal">
+              <h2 id="ctaFinalTitle">Veja o Sysgate funcionando no seu condomínio.</h2>
+              <p>Uma chamada de 20 minutos com o painel, o app do morador e o app de serviços. Atendemos Campinas e região.</p>
+              <div class="cta-actions">
                 <a
-                  class="btn btn-outline btn-block"
-                  href="https://wa.me/5511981782129?text=Ol%C3%A1!%20Sou%20s%C3%ADndico(a)%20e%20quero%20ver%20o%20Sysgate%20na%20pr%C3%A1tica."
+                  class="btn btn-primary"
+                  href="https://wa.me/5511981782129?text=Ol%C3%A1!%20Quero%20agendar%20uma%20demonstra%C3%A7%C3%A3o%20do%20Sysgate."
                   target="_blank"
                   rel="noopener"
                 >
-                  <svg class="icon" width="15" height="15"><use href="#i-tie"/></svg>
-                  Sou síndico, quero ver na prática
+                  <svg class="icon" width="15" height="15"><use href="#i-whatsapp"/></svg>
+                  Agendar demo
                 </a>
-              </article>
-
-              <article class="card-vertical reveal" data-delay="100">
-                <div class="card-vertical-icon"><svg class="icon" width="20" height="20"><use href="#i-handshake"/></svg></div>
-                <h3>Para administradoras</h3>
-                <p>
-                  Pensado para quem gerencia uma carteira inteira de condomínios
-                  e precisa padronizar processos e relatórios, sem aumentar a
-                  equipe.
-                </p>
-                <ul>
-                  <li><svg class="icon" width="14" height="14"><use href="#i-check"/></svg>Centralize vários condomínios em um só painel.</li>
-                  <li><svg class="icon" width="14" height="14"><use href="#i-check"/></svg>Padronize fluxo de visitantes, entregas e comunicação.</li>
-                  <li><svg class="icon" width="14" height="14"><use href="#i-check"/></svg>Reduza chamados operacionais com um app simples para moradores.</li>
-                  <li><svg class="icon" width="14" height="14"><use href="#i-check"/></svg>Integre facilmente novos condomínios à plataforma.</li>
-                </ul>
-                <a
-                  class="btn btn-outline btn-block"
-                  href="https://wa.me/5511981782129?text=Ol%C3%A1!%20Sou%20administradora%20e%20quero%20uma%20demo%20do%20Sysgate."
-                  target="_blank"
-                  rel="noopener"
-                >
-                  <svg class="icon" width="15" height="15"><use href="#i-handshake"/></svg>
-                  Sou administradora, quero uma demo
+                <a class="btn btn-ghost" href="mailto:contato@sysgate.com.br">
+                  <svg class="icon" width="15" height="15"><use href="#i-mail"/></svg>
+                  contato@sysgate.com.br
                 </a>
-              </article>
-
-              <article class="card-vertical reveal" data-delay="200">
-                <div class="card-vertical-icon"><svg class="icon" width="20" height="20"><use href="#i-wrench"/></svg></div>
-                <h3>Para zeladores e porteiros</h3>
-                <p>
-                  A operação do dia a dia também merece uma ferramenta boa.
-                  Sem planilha, sem rádio, sem “esqueci de anotar”.
-                </p>
-                <ul>
-                  <li><svg class="icon" width="14" height="14"><use href="#i-check"/></svg>Fila de chamados clara, com prioridade e prazo.</li>
-                  <li><svg class="icon" width="14" height="14"><use href="#i-check"/></svg>Abertura de ocorrência direto da portaria.</li>
-                  <li><svg class="icon" width="14" height="14"><use href="#i-check"/></svg>Acesso apenas ao que é da sua função.</li>
-                  <li><svg class="icon" width="14" height="14"><use href="#i-check"/></svg>Histórico de tudo que já foi resolvido.</li>
-                </ul>
-                <a
-                  class="btn btn-outline btn-block"
-                  href="https://wa.me/5511981782129?text=Ol%C3%A1!%20Trabalho%20na%20portaria%20e%20quero%20conhecer%20o%20Sysgate."
-                  target="_blank"
-                  rel="noopener"
-                >
-                  <svg class="icon" width="15" height="15"><use href="#i-wrench"/></svg>
-                  Trabalho na portaria, quero conhecer
-                </a>
-              </article>
+              </div>
             </div>
           </div>
         </section>
@@ -682,7 +702,7 @@
       <footer>
         <div class="footer-grid footer-grid-wide">
           <div class="footer-brand-block">
-            <img src="assets/logo-sysgate.png" alt="Sysgate" />
+            <img src="assets/logo-sysgate-light.png" alt="Sysgate" width="520" height="103" />
             <p>
               Ecossistema completo para condomínios: portal do síndico, app do
               morador e app de serviços, integrados em tempo real.
@@ -754,13 +774,10 @@
 
     <!-- Sticky mobile CTA -->
     <div class="mobile-cta">
-      <button
-        class="btn btn-outline"
-        onclick="document.getElementById('demos').scrollIntoView({ behavior: 'smooth' })"
-      >
+      <a class="btn btn-ghost" href="#demos">
         <svg class="icon" width="15" height="15"><use href="#i-eye"/></svg>
         Como funciona
-      </button>
+      </a>
       <a
         class="btn btn-primary"
         href="https://wa.me/5511981782129?text=Ol%C3%A1!%20Quero%20agendar%20uma%20demonstra%C3%A7%C3%A3o%20do%20Sysgate."
@@ -776,63 +793,113 @@
       // Atualiza ano no rodapé
       document.getElementById("year").textContent = new Date().getFullYear();
 
+      const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
       // Menu mobile
       const navToggle = document.getElementById("navToggle");
       const mobileMenu = document.getElementById("mobileMenu");
       const navToggleIcon = document.getElementById("navToggleIcon");
 
-      navToggle.addEventListener("click", () => {
-        const isOpen = mobileMenu.classList.toggle("open");
+      const setMenu = (isOpen) => {
+        mobileMenu.classList.toggle("open", isOpen);
         navToggle.setAttribute("aria-expanded", String(isOpen));
-        navToggleIcon.innerHTML = isOpen
-          ? '<use href="#i-x"></use>'
-          : '<use href="#i-menu"></use>';
-      });
+        navToggleIcon.innerHTML = isOpen ? '<use href="#i-x"></use>' : '<use href="#i-menu"></use>';
+      };
+      navToggle.addEventListener("click", () => setMenu(!mobileMenu.classList.contains("open")));
+      mobileMenu.querySelectorAll("a").forEach((link) => link.addEventListener("click", () => setMenu(false)));
 
-      mobileMenu.querySelectorAll("a").forEach((link) => {
-        link.addEventListener("click", () => {
-          mobileMenu.classList.remove("open");
-          navToggle.setAttribute("aria-expanded", "false");
-          navToggleIcon.innerHTML = '<use href="#i-menu"></use>';
-        });
-      });
-
-      // Efeito reveal on scroll
+      // Revela seções ao entrar na tela
       const revealEls = document.querySelectorAll(".reveal");
-      const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              const el = entry.target;
-              const delay = el.getAttribute("data-delay") || 0;
-              setTimeout(() => {
-                el.classList.add("visible");
-              }, +delay);
-              observer.unobserve(el);
-            }
-          });
-        },
-        { threshold: 0.15 },
-      );
-      revealEls.forEach((el) => observer.observe(el));
-
-      const demoVideo = document.getElementById("demoVideo");
-      const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-      if (demoVideo && "IntersectionObserver" in window && !reduceMotion) {
-        const videoObserver = new IntersectionObserver(
+      if ("IntersectionObserver" in window && !reduceMotion) {
+        const observer = new IntersectionObserver(
           (entries) => {
             entries.forEach((entry) => {
               if (entry.isIntersecting) {
-                demoVideo.play().catch(() => {});
-              } else {
-                demoVideo.pause();
+                entry.target.classList.add("visible");
+                observer.unobserve(entry.target);
               }
             });
           },
-          { threshold: 0.35 },
+          { threshold: 0.12, rootMargin: "0px 0px -40px 0px" },
         );
-        videoObserver.observe(demoVideo);
+        revealEls.forEach((el) => observer.observe(el));
+      } else {
+        revealEls.forEach((el) => el.classList.add("visible"));
       }
+
+      // Vídeos tocam só quando visíveis
+      const playWhenVisible = (video, threshold) => {
+        if (!video || !("IntersectionObserver" in window) || reduceMotion) return;
+        new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) video.play().catch(() => {});
+              else video.pause();
+            });
+          },
+          { threshold },
+        ).observe(video);
+      };
+      playWhenVisible(document.getElementById("demoVideo"), 0.35);
+
+      const appVideo = document.getElementById("appVideo");
+      playWhenVisible(appVideo, 0.4);
+
+      // Som do vídeo do app do morador
+      const soundBtn = document.getElementById("appVideoSound");
+      soundBtn.addEventListener("click", () => {
+        appVideo.muted = !appVideo.muted;
+        if (!appVideo.muted) appVideo.play().catch(() => {});
+        soundBtn.setAttribute("aria-pressed", String(!appVideo.muted));
+        document.getElementById("appVideoSoundLabel").textContent = appVideo.muted ? "Ativar som" : "Silenciar";
+        document.getElementById("appVideoSoundIcon").innerHTML = appVideo.muted
+          ? '<use href="#i-volume-x"></use>'
+          : '<use href="#i-volume"></use>';
+      });
+
+      // Funcionalidades: um item aberto por vez e tela correspondente
+      const features = document.querySelectorAll("#featureList .feature");
+      const shots = document.querySelectorAll("#featureShots img");
+      features.forEach((item) => {
+        item.addEventListener("toggle", () => {
+          if (!item.open) return;
+          features.forEach((other) => {
+            if (other !== item) other.open = false;
+          });
+          shots.forEach((shot, i) => shot.classList.toggle("is-active", i === +item.dataset.shot));
+        });
+      });
+
+      // Para quem é: abas
+      const tabs = Array.from(document.querySelectorAll(".tab"));
+      const tabIndicator = document.querySelector(".tabs-indicator");
+      const moveIndicator = (tab) => {
+        tabIndicator.style.width = tab.offsetWidth + "px";
+        tabIndicator.style.transform = "translate(" + tab.offsetLeft + "px, " + (tab.offsetTop - 4) + "px)";
+      };
+      const selectTab = (tab, focus) => {
+        tabs.forEach((t) => {
+          const active = t === tab;
+          t.setAttribute("aria-selected", String(active));
+          t.tabIndex = active ? 0 : -1;
+          document.getElementById(t.getAttribute("aria-controls")).hidden = !active;
+        });
+        moveIndicator(tab);
+        if (focus) tab.focus();
+      };
+      tabs.forEach((tab, i) => {
+        tab.addEventListener("click", () => selectTab(tab));
+        tab.addEventListener("keydown", (e) => {
+          const step = e.key === "ArrowRight" ? 1 : e.key === "ArrowLeft" ? -1 : 0;
+          if (!step) return;
+          e.preventDefault();
+          selectTab(tabs[(i + step + tabs.length) % tabs.length], true);
+        });
+      });
+      selectTab(tabs[0]);
+      requestAnimationFrame(() => (tabIndicator.parentElement.dataset.ready = ""));
+      window.addEventListener("resize", () => moveIndicator(tabs.find((t) => t.tabIndex === 0)));
+      document.fonts && document.fonts.ready.then(() => moveIndicator(tabs.find((t) => t.tabIndex === 0)));
     </script>
     <script src="assets/cookie-consent.js" defer></script>
   </body>

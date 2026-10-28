@@ -1,24 +1,24 @@
 /* Sysgate - estilos compartilhados para páginas institucionais/legais */
 
 :root {
-  --bg: #ffffff;
-  --bg-alt: #f8fafc;
-  --ink: #0f172a;
-  --ink-soft: #1e293b;
-  --muted: #64748b;
+  --bg: #0a0a0b;
+  --bg-alt: #17171a;
+  --ink: #f4f4f5;
+  --ink-soft: #d4d4d8;
+  --muted: #a1a1aa;
   --accent: #ef4444;
-  --accent-dark: #b91c1c;
+  --accent-dark: #f87171;
   --accent-mid: #dc2626;
   --accent-soft: rgba(239, 68, 68, 0.1);
   --success: #16a34a;
-  --border: #e6e8ee;
-  --border-strong: #d8dbe3;
+  --border: rgba(255, 255, 255, 0.08);
+  --border-strong: rgba(255, 255, 255, 0.14);
   --radius-sm: 10px;
   --radius-md: 14px;
   --radius-lg: 20px;
   --radius-xl: 26px;
-  --shadow-soft: 0 8px 24px rgba(15, 23, 42, 0.06);
-  --shadow-strong: 0 24px 60px rgba(15, 23, 42, 0.14);
+  --shadow-soft: 0 8px 24px rgba(0, 0, 0, 0.4);
+  --shadow-strong: 0 24px 60px rgba(0, 0, 0, 0.6);
   --shadow-accent: 0 16px 36px rgba(220, 38, 38, 0.28);
   --ease: cubic-bezier(0.16, 1, 0.3, 1);
   --transition-fast: 0.2s var(--ease);
@@ -33,6 +33,7 @@
 
 html {
   scroll-behavior: smooth;
+  color-scheme: dark;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -47,7 +48,7 @@ html {
 
 body {
   font-family:
-    "Plus Jakarta Sans",
+    "Geist",
     system-ui,
     -apple-system,
     BlinkMacSystemFont,
@@ -110,7 +111,7 @@ header {
   top: 0;
   z-index: 60;
   backdrop-filter: blur(14px) saturate(160%);
-  background: rgba(255, 255, 255, 0.86);
+  background: rgba(10, 10, 11, 0.72);
   border-bottom: 1px solid var(--border);
 }
 
@@ -125,7 +126,8 @@ header {
 }
 
 .nav-left img {
-  height: 30px;
+  height: 24px;
+  width: auto;
 }
 
 .nav-back {
@@ -161,7 +163,7 @@ header {
   justify-content: center;
   gap: 8px;
   cursor: pointer;
-  background: #fff;
+  background: rgba(255, 255, 255, 0.04);
   color: var(--ink);
   min-height: 44px;
   transition:
@@ -177,7 +179,7 @@ header {
 }
 
 .btn-primary {
-  background: linear-gradient(135deg, var(--accent-mid), var(--accent-dark));
+  background: var(--accent-mid);
   border-color: transparent;
   color: #fff;
   box-shadow: var(--shadow-accent);
@@ -196,7 +198,7 @@ header {
 }
 
 .btn-outline {
-  background: #fff;
+  background: rgba(255, 255, 255, 0.04);
 }
 
 .btn-outline:hover {
@@ -424,7 +426,7 @@ header {
 /* Formulário de exclusão de dados */
 
 .form-card {
-  background: #fff;
+  background: #111113;
   border-radius: var(--radius-lg);
   border: 1px solid var(--border);
   padding: 30px;
@@ -485,7 +487,7 @@ header {
 .form-group textarea:focus {
   border-color: var(--accent);
   box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.13);
-  background: #fff;
+  background: #1c1c20;
 }
 
 .form-checkbox {
@@ -522,7 +524,7 @@ header {
 
 .form-status.success {
   background: rgba(22, 163, 74, 0.1);
-  color: #15803d;
+  color: #4ade80;
   border: 1px solid rgba(22, 163, 74, 0.25);
 }
 
@@ -536,7 +538,7 @@ header {
 
 footer {
   border-top: 1px solid var(--border);
-  background: var(--ink);
+  background: var(--bg);
   color: rgba(255, 255, 255, 0.7);
   padding-top: 56px;
 }
@@ -551,9 +553,9 @@ footer {
 }
 
 .footer-brand-block img {
-  height: 30px;
+  height: 24px;
+  width: auto;
   margin-bottom: 14px;
-  filter: brightness(0) invert(1);
 }
 
 .footer-brand-block p {
@@ -683,4 +685,44 @@ footer {
     grid-template-columns: minmax(0, 1fr);
     gap: 28px;
   }
+}
+
+/* Aviso de cookies no tema escuro */
+
+body .cookie-consent {
+  background: #141416;
+  border-color: var(--border-strong);
+  box-shadow: 0 30px 70px -20px rgba(0, 0, 0, 0.9);
+  font-family: "Geist", system-ui, sans-serif;
+}
+
+body .cookie-consent-icon {
+  color: var(--accent-dark);
+}
+
+body .cookie-consent-title {
+  color: var(--ink);
+}
+
+body .cookie-consent-text {
+  color: var(--muted);
+}
+
+body .cookie-consent-text a {
+  color: var(--accent-dark);
+}
+
+.cookie-consent .cookie-consent-accept {
+  background: var(--accent-mid);
+  box-shadow: none;
+}
+
+.cookie-consent .cookie-consent-reject {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: var(--border-strong);
+  color: var(--ink);
+}
+
+.cookie-consent .cookie-consent-reject:hover {
+  background: rgba(255, 255, 255, 0.08);
 }
